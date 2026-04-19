@@ -1,12 +1,11 @@
 // pages/index.js
 // ============================================================
-// SOTA Next.js Frontend — All 3 pages with sidebar
+// SOTA Next.js Frontend — All 4 pages with sidebar
 // ============================================================
-// Matches the Streamlit SOTA layout:
-// - Sidebar with navigation, language selector, examples
 // - Page 1: Journal Entry (분개 도우미)
 // - Page 2: Term Explainer (용어 설명)
 // - Page 3: History (분개 히스토리)
+// - Page 4: File Analyzer (파일 분석기) — CSV, Excel, PDF
 // ============================================================
 
 import { useState, useEffect } from "react";
@@ -25,6 +24,11 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
   const [expandedId, setExpandedId] = useState(null);
+
+  // ── File Analyzer state ──
+  const [fileResult, setFileResult] = useState(null);
+  const [fileLoading, setFileLoading] = useState(false);
+  const [fileError, setFileError] = useState("");
 
   // ── Fetch history when switching to history page ──
   useEffect(() => {
@@ -87,6 +91,38 @@ export default function Home() {
     } catch {}
   };
 
+  // ── API call: File Upload & Analysis ──
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setFileLoading(true);
+    setFileError("");
+    setFileResult(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch(`${API_BASE}/api/analyze-file`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setFileResult(data);
+      } else {
+        setFileError(data.error || "File processing failed.");
+      }
+    } catch (err) {
+      setFileError("Network error — is the backend running on port 8000?");
+    } finally {
+      setFileLoading(false);
+    }
+  };
+
   // ── Example transactions ──
   const examples = [
     "사무용품 100,000원을 현금으로 구매",
@@ -107,7 +143,10 @@ export default function Home() {
 
       {/* ════════ SIDEBAR ════════ */}
       <aside className="sidebar">
-        <div className="sidebar-header">⚙️ 설정</div>
+        <div className="sidebar-header">
+          <span className="sidebar-logo">📊</span>
+          Transaction Agent
+        </div>
 
         {/* Navigation */}
         <nav className="sidebar-nav">
@@ -119,6 +158,9 @@ export default function Home() {
           </button>
           <button className={`nav-item ${activePage === "history" ? "active" : ""}`} onClick={() => navigateTo("history")}>
             📋 분개 히스토리
+          </button>
+          <button className={`nav-item ${activePage === "file" ? "active" : ""}`} onClick={() => navigateTo("file")}>
+            📁 파일 분석기
           </button>
         </nav>
 
@@ -154,6 +196,7 @@ export default function Home() {
 
       {/* ════════ MAIN CONTENT ════════ */}
       <main className="main-content">
+        <div className="content-wrapper">
 
         {/* ──── PAGE: Journal Entry ──── */}
         {activePage === "journal" && (
@@ -284,11 +327,128 @@ export default function Home() {
           </>
         )}
 
+        {/* ──── PAGE: File Analyzer ──── */}
+        {activePage === "file" && (
+          <>
+            <div className="page-header">
+              <h1>📁 파일 분석기</h1>
+              <p>CSV, Excel, 또는 PDF 파일을 업로드하면 <strong>자동 정제</strong> 후 <strong>AI가 분석</strong>합니다.</p>
+            </div>
+            <div className="page-divider" />
+
+            {/* File Upload */}
+            <div className="input-group">
+              <label>파일 선택 (CSV, Excel, PDF)</label>
+              <div className="file-upload-area">
+                <input
+                  type="file"
+                  accept=".csv,.xlsx,.xls,.pdf"
+                  onChange={handleFileUpload}
+                />
+                <p>파일을 선택하거나 여기에 드래그하세요</p>
+              </div>
+            </div>
+
+            {/* Loading */}
+            {fileLoading && (
+              <div className="loading">
+                <div className="spinner" />
+                <span>파일을 분석하고 있습니다... pandas 정제 → GPT 분석 중</span>
+              </div>
+            )}
+
+            {/* Error */}
+            {fileError && (
+              <div className="error-msg">⚠️ {fileError}</div>
+            )}
+
+            {/* Results */}
+            {fileResult && (
+              <>
+                {/* Stats Cards */}
+                <div className="success-msg">
+                  ✅ {fileResult.filename} — {fileResult.row_count}건의 거래가 정제되었습니다.
+                </div>
+
+                <div className="stats-row">
+                  <div className="stat-card stat-blue">
+                    <div className="stat-number">{fileResult.row_count}</div>
+                    <div className="stat-label">Transactions</div>
+                  </div>
+                  <div className="stat-card stat-green">
+                    <div className="stat-number">{fileResult.columns.length}</div>
+                    <div className="stat-label">Columns</div>
+                  </div>
+                  <div className={`stat-card ${fileResult.summary?.anomalies?.length > 0 ? "stat-red" : "stat-green"}`}>
+                    <div className="stat-number">{fileResult.summary?.anomalies?.length || 0}</div>
+                    <div className="stat-label">Anomalies</div>
+                  </div>
+                </div>
+
+                {/* GPT Analysis */}
+                {fileResult.gpt_analysis && (
+                  <>
+                    <h3 style={{ marginBottom: "8px", marginTop: "24px" }}>🤖 AI 분석 결과</h3>
+                    <div className="result-card">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {fileResult.gpt_analysis}
+                      </ReactMarkdown>
+                    </div>
+                  </>
+                )}
+
+                {/* Duplicate Vendors Warning */}
+                {fileResult.summary?.duplicate_vendors?.length > 0 && (
+                  <div className="warning-box">
+                    <strong>⚠️ 중복 의심 거래처:</strong>
+                    {fileResult.summary.duplicate_vendors.map((dup, i) => (
+                      <div key={i} style={{ marginTop: "4px", fontSize: "14px" }}>
+                        &quot;{dup.name_1}&quot; ↔ &quot;{dup.name_2}&quot; — {dup.issue}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Data Preview Table */}
+                <h3 style={{ marginBottom: "8px", marginTop: "24px" }}>📋 데이터 미리보기 (상위 30건)</h3>
+                <div className="table-wrapper">
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        {fileResult.columns.map((col) => (
+                          <th key={col}>{col}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {fileResult.preview.slice(0, 30).map((row, i) => (
+                        <tr key={i}>
+                          {fileResult.columns.map((col) => (
+                            <td key={col}>
+                              {col === "amount" || col === "balance"
+                                ? (row[col] !== "" && row[col] !== null
+                                    ? Number(row[col]).toLocaleString("en-US", { style: "currency", currency: "USD" })
+                                    : "")
+                                : (row[col] ?? "")}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+          </>
+        )}
+
         {/* ──── Footer ──── */}
         <div className="footer">
           ⚠️ 이 앱은 학습 목적으로 만들어졌습니다. 실제 회계 처리 시에는 반드시 전문가와 상의하세요.
           <br />
           Frontend: Next.js | Backend: FastAPI | AI: OpenAI GPT-4o-mini
+        </div>
+
         </div>
       </main>
     </div>
