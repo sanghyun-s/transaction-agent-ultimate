@@ -7,3 +7,7 @@ frontend/node_modules/
 frontend/.next/
 .vscode/
 .idea/
+
+# Reconciliation runtime outputs
+backend/reconciliation_outputs/
+.DS_Store
