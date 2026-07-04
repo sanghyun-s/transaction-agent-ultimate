@@ -1,364 +1,253 @@
 # 📊 Transaction Agent Ultimate (TAU)
 
-AI-powered accounting assistant with a **FastAPI backend** and **Next.js frontend**, integrating **OpenAI GPT-4o-mini** for accounting assistance and the **Claude Agent SDK** for autonomous 1099 reconciliation.
+**An AI-powered accounting utility hub** — a **FastAPI backend** and **Next.js frontend** that brings journal-entry generation, terminology help, file analysis, statement review, and an end-to-end 1099 workflow together in one bilingual (Korean / English) interface.
 
-TAU is a comprehensive AI suite for accountants and finance professionals — combining journal entry generation, terminology explanations, session history, file analysis, and an end-to-end 1099 pre-reconciliation workflow in a single bilingual interface (Korean / English).
+TAU is designed to **converge a family of accounting tools into a single hub.** Rather than shipping separate apps, each capability is folded in as a compact, function-named **add-on** that sits on a shared spine — one unified work archive, one PDF ingestion engine, one language setting. Standalone prototypes (PREPARE, CASSIA, LUCENT) are being reduced to add-ons and brought in one at a time.
+
+> **Version 0.7.0** — adds the unified Work History archive, the shared PDF ingestion service (Claude PDF Skill + rule engine), and the first PREPARE add-on: **Statement Review**.
 
 ---
 
-## 🎯 Features
+## 🧱 The shared spine
 
-### 1. 📊 Journal Entry Generator (분개 도우미)
-- Input any transaction description in Korean or English (e.g., `"사무용품 100,000원을 현금으로 구매"`)
-- Get a complete debit/credit journal entry in a formatted table
-- Recommended account titles with plain-language explanations
-- Step-by-step accounting principle breakdown
-- Supports K-IFRS (Korean) and IFRS (English) standards
+Every tool reads from and writes to three shared services. This is what keeps the hub cohesive as add-ons are added:
 
-### 2. 📖 Term Explainer (용어 설명)
-- Enter any accounting term (e.g., `"감가상각"`, `"accrual basis"`)
-- Bilingual explanation (Korean + English) side-by-side
-- Journal entry example in a formatted table
-- Practical tips for real-world usage
+- **Work History** — a single SQLite-backed archive (`backend/tau_history.db`). Any tool can save a result; the Work History page lists everything across all tools, filters by tool, reopens a saved result, re-downloads it, or clears the archive.
+- **PDF ingestion service** — one engine that turns a statement PDF into classified transactions plus a reconciliation snapshot. Two backends: the **Claude PDF Skill** (accurate, column-aware) and a **rule engine** (instant, free). Consumed by every statement-oriented tool.
+- **Bilingual output** — a global language selector (Korean / English / Bilingual) with a per-tool override. Korean follows K-IFRS phrasing, English follows IFRS.
 
-### 3. 📋 Session History (분개 히스토리)
-- Automatically saves every journal entry generated during the session
-- Expandable cards to review past entries
-- One-click history reset
-- Persists across page navigation within the session
+---
 
-### 4. 📁 File Analyzer (파일 분석기)
-- Upload CSV, Excel (.xlsx), or PDF files
-- Pandas pipeline: cleans QuickBooks-style GL exports (strips headers, totals, spacer columns)
-- Anomaly detection: Z-score based outlier flagging (2.5 std deviations)
-- Duplicate vendor detection: catches formatting inconsistencies
-- PDF table extraction: uses pdfplumber to extract tables from any PDF
-- GPT analysis: AI-generated financial summary with recommended actions
-- Data preview table with currency formatting
+## 🎯 Tools
 
-### 5. 📑 1099 Pre-Reconciliation Worksheet (1099 정산 워크시트) ⭐ *New*
-- Upload a bank or credit card statement (PDF) + optional vendor master list (CSV)
-- Extracts all transactions, normalizes vendor names (handles "AMZN Mktp" → "Amazon"), aggregates by canonical vendor
-- Identifies vendors crossing the $600 1099 threshold
-- Flags vendors that need human review (low-confidence matches, multiple name variants)
-- Generates a three-sheet accountant-grade Excel workbook (Vendor Summary / Transactions / Summary Stats)
-- **Two processing modes:**
-  - **Rule-Based mode** — fast, deterministic, no API cost. Pure Python pipeline.
-  - **Claude Agent mode** — the Claude Agent SDK autonomously orchestrates the extraction, normalization, aggregation, and Excel generation tools. Produces a plain-English analysis of the results. Uses Anthropic API credits.
-- Model selection for agent mode: Haiku 4.5 (cost-efficient) or Opus 4.7 (highest quality)
-- Download-ready Excel output with review-flagged rows highlighted
+### Live today
 
-> **Runs as an add-on to TAU AND as a standalone server.** The 1099 reconciliation module can also be run independently at `http://localhost:8000` via its own FastAPI entry point — see the *Standalone Mode* section below.
+#### 1. 📊 Journal Entry Generator
+Describe a transaction in Korean or English (e.g. `사무용품 100,000원을 현금으로 구매`) and get a complete debit/credit entry, recommended account titles with plain-language notes, and a step-by-step principle breakdown. Save any result to Work History.
 
-### 🛡️ Error Resilience
-- 429 (Quota exceeded) → friendly message with billing link
-- 401 (Invalid API key) → instructions to fix `.env`
-- 500 (Server error) → retry suggestion
-- Network issues → backend connection check reminder
+#### 2. 📖 Term Explainer
+Enter an accounting term (e.g. `감가상각`, `accrual basis`) for a side-by-side bilingual explanation, a worked journal-entry example, and practical usage tips.
 
-### 🌐 Bilingual Support
-- Full Korean (K-IFRS) and English (IFRS) support
-- Language toggle in the sidebar applies to all pages
-- API responses are localized based on user selection
+#### 3. 📋 Work History
+The unified archive described above — no longer journal-only or session-only. Every tool's saved output lands here with a tool badge and timestamp, persists across navigation, and is re-openable and re-downloadable.
+
+#### 4. 📁 File Analyzer
+Upload CSV, Excel (`.xlsx`), or PDF. Cleans QuickBooks-style GL exports, flags outliers (Z-score), catches duplicate/variant vendor names, extracts PDF tables via pdfplumber, and produces a GPT-written summary with recommended actions.
+
+#### 5. 📑 1099 Worksheet
+Upload a bank/credit-card statement (PDF) plus an optional vendor master (CSV). Extracts and normalizes vendors, aggregates by canonical name, flags vendors crossing the $600 threshold, and generates a multi-sheet accountant-grade Excel workbook. Two modes: a deterministic **rule-based** pipeline (free) and a **Claude Agent** mode that orchestrates the tools and adds a plain-English summary.
+
+#### 6. 📄 Statement Review ⭐ *new — first PREPARE add-on*
+Upload one statement and get a per-statement bookkeeping review:
+- **Row-level classification** — every transaction labeled (vendor payment, check, deposit, payroll, transfer, fee, interest), each marked included / excluded for 1099 aggregation with an exclusion reason.
+- **Statement reconciliation** — the statement's own stated figures laid out deterministically: `beginning + deposits − withdrawals − checks − transfers − fees = calculated ending`, compared against the reported ending, with a **Balanced / Off** verdict. Built on the "transcribe, don't compute" principle: the model transcribes the stated balances, and the arithmetic runs in one place on the backend.
+- **Two modes** — *Quick preview* (rule engine, instant, free) and *Full analysis* (Claude PDF Skill, column-aware, ~1–4 min).
+- Saves a clean markdown artifact to Work History.
+
+### Planned add-ons (the convergence roadmap)
+
+| Add-on | Source app | Function |
+|--------|-----------|----------|
+| **Consolidated Workbook** | PREPARE | Cross-statement vendor aggregation and $600/entity 1099 eligibility rollup (the vendor-level workbook). |
+| **Data & Document Chat** | CASSIA | Conversational retrieval over your own records and documents. |
+| **GL Audit Review Packet** | LUCENT | Pre-audit checks and a review packet over the general ledger. |
+
+Each is a compact add-on renamed by function, built on the same shared spine.
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-┌─────────────────────────┐       HTTP        ┌────────────────────────────┐
-│  Next.js Frontend       │  ──── JSON ────▶  │  FastAPI Backend           │
-│  (localhost:3000)       │  ◀──── JSON ────  │  (localhost:8000)          │
-│                         │                    │                            │
-│  • React UI + Sidebar   │                    │  • POST /api/journal       │
-│  • 5-page navigation    │                    │  • POST /api/term          │
-│  • Markdown rendering   │                    │  • GET/DELETE /api/history │
-│  • File upload          │                    │  • POST /api/analyze-file  │
-│  • Error display        │                    │  • POST /api/reconcile/*   │
-└─────────────────────────┘                    │  • GET  /api/reconcile/    │
-                                               │         download/{id}      │
-                                               └─────────────┬──────────────┘
-                                                             │
-                                    ┌────────────────────────┼────────────────────────┐
-                                    ▼                                                 ▼
-                        ┌───────────────────────┐                         ┌────────────────────────┐
-                        │  OpenAI GPT-4o-mini   │                         │  Claude Agent SDK      │
-                        │  (journal, term,      │                         │  (1099 reconciliation) │
-                        │   file analyzer)      │                         │                        │
-                        └───────────────────────┘                         └────────────────────────┘
+┌─────────────────────────┐      HTTP / JSON      ┌─────────────────────────────┐
+│  Next.js frontend       │  ◀──────────────────▶ │  FastAPI backend            │
+│  (localhost:3000)       │                        │  (localhost:8000)           │
+│                         │                        │                             │
+│  • Sidebar + tools/*    │                        │  routers/                   │
+│  • Work History page    │                        │   • core     /api/journal   │
+│  • Bilingual selector   │                        │              /api/term      │
+│  • Save-to-History      │                        │   • files    /api/analyze-  │
+│    on every tool        │                        │              file           │
+│                         │                        │   • history  /api/history/* │
+│                         │                        │   • reconcile /api/reconcile│
+│                         │                        │   • pdf      /api/pdf/ingest│
+└─────────────────────────┘                        └───────────┬─────────────────┘
+                                                                │
+        ┌───────────────────────────────┬───────────────────────┼───────────────────────┐
+        ▼                               ▼                        ▼                       ▼
+┌────────────────────┐   ┌────────────────────┐   ┌────────────────────┐   ┌────────────────────┐
+│ OpenAI GPT-4o-mini │   │ Claude Agent SDK   │   │ Claude PDF Skill   │   │ SQLite             │
+│ journal · term ·   │   │ 1099 reconcile     │   │ statement ingest   │   │ Work History       │
+│ file analyzer      │   │ orchestration      │   │ (+ rule fallback)  │   │ archive            │
+└────────────────────┘   └────────────────────┘   └────────────────────┘   └────────────────────┘
 ```
 
-Two AI providers coexist — each feature uses the best tool for the job.
+The backend is organized into routers, with a shared `app/services/pdf/` package that both statement tools consume.
 
 ---
 
-## 📂 Project Structure
+## 📂 Project structure
 
 ```
 transaction-agent-ultimate/
 ├── .gitignore
+├── README.md
+├── .claude/skills/pdf/                 # Claude PDF Skill (copied in; not committed)
 ├── backend/                            # FastAPI (Python)
-│   ├── .env                            # API keys (never committed)
+│   ├── .env                            # API keys — never committed
 │   ├── requirements.txt
+│   ├── tau_history.db                  # Work History (SQLite; not committed)
 │   └── app/
-│       ├── __init__.py
-│       ├── main.py                     # All FastAPI endpoints
-│       ├── config.py                   # Typed settings (pydantic-settings)
+│       ├── main.py                     # app factory, mounts routers (v0.7.0)
+│       ├── config.py                   # typed settings
+│       ├── db.py                        # SQLite init (history table)
+│       ├── routers/
+│       │   ├── core.py                 # /api/journal, /api/term
+│       │   ├── files.py                # /api/analyze-file
+│       │   ├── reconcile.py            # /api/reconcile/*
+│       │   ├── history.py              # /api/history/*  (unified archive)
+│       │   └── pdf.py                  # /api/pdf/ingest (shared PDF service)
 │       ├── services/
-│       │   ├── openai_service.py       # OpenAI API client + error handling
-│       │   ├── prompts.py              # System prompts (few-shot + CoT)
-│       │   ├── file_service.py         # Pandas cleaning + PDF parsing
-│       │   ├── file_prompts.py         # GPT prompts for file analysis
-│       │   └── reconciliation_service.py  # ⭐ 1099 pipeline (rule-based + agent)
+│       │   ├── openai_service.py
+│       │   ├── prompts.py              # + bilingual (KO / EN / Bilingual)
+│       │   ├── file_service.py
+│       │   ├── reconciliation_service.py
+│       │   ├── history_service.py      # save / list / get / delete / reset
+│       │   └── pdf/                     # ⭐ shared PDF ingestion package
+│       │       ├── transaction.py       # shared row contract
+│       │       ├── classifier.py        # deterministic row classifier
+│       │       ├── rule_extractor.py    # pdfplumber + regex engine
+│       │       ├── skill_adapter.py     # Claude PDF Skill engine
+│       │       ├── reconciliation.py    # Source-A reconciliation (deterministic)
+│       │       ├── service.py           # ingest_statement() facade
+│       │       └── pdf_skill_prompt.md  # classification policy
 │       └── models/
-│           ├── schemas.py              # Journal / term / history schemas
-│           ├── file_schemas.py         # File analyzer schemas
-│           └── reconciliation_schemas.py  # ⭐ Reconciliation response schema
+│           ├── schemas.py
+│           ├── file_schemas.py
+│           ├── reconciliation_schemas.py
+│           └── history_schemas.py
 │
-├── frontend/                           # Next.js (React)
-│   ├── package.json
-│   ├── next.config.js
-│   ├── pages/
-│   │   ├── _app.js                     # Global CSS loader
-│   │   └── index.js                    # All 5 pages + sidebar (single-page app)
-│   └── styles/
-│       └── globals.css                 # Navy professional theme
-│
-└── README.md                           # This file
+└── frontend/                           # Next.js (React)
+    ├── pages/
+    │   ├── _app.js
+    │   └── index.js                    # shell + routing
+    ├── components/
+    │   ├── Sidebar.js
+    │   ├── WorkHistory.js
+    │   ├── SaveToHistory.js
+    │   ├── LangOverride.js
+    │   ├── i18n.js
+    │   ├── api.js
+    │   └── tools/
+    │       ├── JournalEntry.js
+    │       ├── TermExplainer.js
+    │       ├── FileAnalyzer.js
+    │       ├── Reconcile.js
+    │       └── StatementReview.js      # ⭐ new
+    └── styles/globals.css
 ```
 
 ---
 
-## 📡 API Endpoints
+## 📡 API endpoints
 
-| Method | Endpoint | Description | Request Body |
-|--------|----------|-------------|--------------|
-| GET | `/` | Health check | — |
-| POST | `/api/journal` | Generate journal entry | `{"transaction": "...", "language": "한국어"}` |
-| POST | `/api/term` | Explain accounting term | `{"term": "...", "language": "한국어"}` |
-| GET | `/api/history` | Get all saved entries | — |
-| DELETE | `/api/history` | Clear history | — |
-| POST | `/api/analyze-file` | Analyze uploaded file | `multipart/form-data` (CSV, Excel, PDF) |
-| POST | `/api/reconcile/rule-based` | ⭐ Rule-based 1099 reconciliation | `multipart/form-data` (PDF + optional CSV) |
-| POST | `/api/reconcile/agent` | ⭐ Claude-Agent-powered reconciliation | `multipart/form-data` + `model` form field |
-| GET | `/api/reconcile/download/{file_id}` | ⭐ Download generated Excel | — |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Health check (returns version) |
+| POST | `/api/journal` | Generate a journal entry |
+| POST | `/api/term` | Explain an accounting term |
+| GET / POST / DELETE | `/api/history` | List / save / clear the Work History archive |
+| GET / DELETE | `/api/history/{id}` | Get / delete one saved result |
+| GET | `/api/history/{id}/download` | Re-download a saved result |
+| POST | `/api/analyze-file` | Analyze an uploaded CSV / Excel / PDF |
+| POST | `/api/reconcile/rule-based` | Rule-based 1099 reconciliation |
+| POST | `/api/reconcile/agent` | Claude-Agent 1099 reconciliation |
+| GET | `/api/reconcile/download/{id}` | Download the generated Excel |
+| POST | `/api/pdf/ingest` | ⭐ Shared statement ingestion → classified rows + reconciliation |
+
+`/api/pdf/ingest` accepts `pdf_file`, `engine` (`skill` \| `rule`), `model`, and `source`, and returns classified transactions, an activity breakdown, and — on the skill engine — a reconciliation block.
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick start
 
 ### Prerequisites
+- Python 3.10+ (tested on 3.13), Node.js 18+ with npm
+- An **OpenAI API key** (journal, term, file analyzer)
+- An **Anthropic API key** (1099 agent mode, Statement Review skill engine)
 
-- **Python 3.10+** (tested on 3.13)
-- **Node.js 18+** (tested on 24) with **npm**
-- An **OpenAI API key** (for journal, term, file analyzer features)
-- An **Anthropic API key** (for 1099 reconciliation agent mode)
-
-### 1. Clone and configure
-
-```bash
-git clone <repository-url>
-cd transaction-agent-ultimate
-```
-
-### 2. Backend setup
-
+### Backend
 ```bash
 cd backend
 python3 -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-
+source venv/bin/activate          # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
 Create `backend/.env`:
-
 ```env
-OPENAI_API_KEY=sk-proj-your-openai-key-here
-ANTHROPIC_API_KEY=sk-ant-api03-your-anthropic-key-here
+OPENAI_API_KEY=sk-proj-...
+ANTHROPIC_API_KEY=sk-ant-api03-...
 ```
 
-> ⚠️ Never commit `.env`. It's in `.gitignore` by default.
-
-Start the backend:
-
+Start it:
 ```bash
 uvicorn app.main:app --reload --port 8000
 ```
+Verify at **http://localhost:8000/docs**.
 
-Verify at **http://localhost:8000/docs** — you should see all 9 endpoints.
+### Statement Review — one-time skill setup
+The skill engine needs the Claude PDF Skill reachable from the project root:
+```bash
+mkdir -p .claude/skills
+cp -R /path/to/PREPARE/.claude/skills/pdf .claude/skills/pdf
+```
+(Or install it user-level at `~/.claude/skills/pdf` to share across projects.) Without it, the skill engine returns a clean failure and the rule engine still works.
 
-### 3. Frontend setup
-
-In a separate terminal:
-
+### Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-
-Open **http://localhost:3000** in your browser.
-
----
-
-## 🧪 Standalone Mode (1099 Reconciliation only)
-
-The 1099 reconciliation module is **also available as a standalone server** that runs independently from the full TAU suite. Use this when you want to ship or demo only the reconciliation feature without the journal/term/history/file-analyzer pages.
-
-### Standalone repository structure
-
-```
-pdf_to_excel_app/
-├── backend/
-│   ├── vendor_normalizer.py
-│   ├── transaction_aggregator.py
-│   ├── pdf_extractor.py
-│   ├── excel_generator.py
-│   └── pipeline.py
-├── frontend/
-│   └── index.html               # Self-contained single-page app
-├── samples/
-│   ├── sample_bank_statement_2024.pdf
-│   └── known_vendors.csv
-├── server.py                    # FastAPI entry point
-├── agent_app.py                 # Claude Agent SDK orchestrator
-├── agent_tools.py               # Tool definitions (MCP server)
-├── run_agent.py                 # CLI entry point
-└── .env
-```
-
-### How to run the standalone server
-
-```bash
-cd pdf_to_excel_app
-source venv/bin/activate   # or create one: python3 -m venv venv
-pip install fastapi uvicorn python-multipart pdfplumber openpyxl reportlab claude-agent-sdk python-dotenv
-
-# Create .env with ANTHROPIC_API_KEY
-echo 'ANTHROPIC_API_KEY=sk-ant-api03-your-key' > .env
-
-uvicorn server:app --reload --port 8000
-```
-
-Open **http://localhost:8000** — the standalone frontend is served at the root, no separate frontend server needed.
-
-### Choosing between modes
-
-| Mode | Use when |
-|------|----------|
-| **TAU integrated** (`/api/reconcile/*`) | You want reconciliation alongside journal, term, history, and file analyzer in one cohesive suite |
-| **Standalone** (`pdf_to_excel_app/server.py`) | You want only the reconciliation feature — fewer dependencies, simpler deployment, quicker demo |
-
-Both modes share the same underlying logic and produce identical Excel output. The TAU version adds integration with the bilingual UI and navy theme; the standalone version ships its own single-file HTML frontend.
+Open **http://localhost:3000**.
 
 ---
 
-## 🎨 Processing Mode Comparison
-
-The 1099 reconciliation feature offers two processing modes side-by-side:
-
-| Aspect | Rule-Based | Claude Agent SDK |
-|--------|-----------|------------------|
-| **Speed** | Instant (< 2 sec) | 10–30 seconds |
-| **Cost** | Free | ~$0.01 (Haiku) / ~$0.09 (Opus) per run |
-| **Determinism** | Fully deterministic | Agent decides tool order |
-| **Output** | Excel + stats | Excel + stats + plain-English Claude analysis |
-| **Best for** | Development, repeated processing, batch jobs | Demonstrating AI orchestration, handling ambiguous cases, explanatory output |
-
-Toggle between modes via the UI. Results are identical in structure — the agent mode adds a natural-language summary explaining what it did.
-
----
-
-## 🧠 How the Claude Agent Mode Works
-
-When the user selects Claude Agent mode, the backend spawns a `ClaudeSDKClient` session. The agent is given access to five custom tools that wrap the Python reconciliation modules:
-
-1. `extract_pdf_transactions(pdf_path)` — pulls transactions via pdfplumber
-2. `load_vendor_list(csv_path)` — loads the canonical vendor master
-3. `normalize_vendors()` — runs fuzzy matching and entity-type extraction
-4. `aggregate_by_vendor()` — groups transactions, computes totals
-5. `generate_excel_report(output_path)` — produces the final workbook
-
-The agent autonomously decides the order of tool calls, handles any errors, and produces a natural-language summary describing the results. All tool execution is auditable — the backend logs every tool call with parameters.
-
----
-
-## 🧪 Testing
-
-Test fixtures are included in the standalone app's `samples/` folder:
-
-- **`sample_bank_statement_2024.pdf`** — 48-transaction year-long test statement with intentional edge cases (vendor name variants, check payments, multiple payments to same vendor, entity type variety)
-- **`known_vendors.csv`** — optional vendor master file with 11 canonical names
-
-Expected output when processed:
-- 48 transactions extracted
-- 16 unique canonical vendors
-- $19,474.87 total reconciled
-- 9 vendors crossing the $600 threshold
-- 8 vendors flagged for human review
-
----
-
-## ⚠️ Known Limitations
-
-This is an MVP intended for portfolio demonstration. Real-world deployment would require:
-
-- **Bank statement variation** — the regex patterns are tuned for the sample PDF format. Real statements from different banks (Chase, BofA, Wells Fargo, Amex, etc.) use different layouts and may produce fewer extractions or require layout-specific parsing logic.
-- **Scanned PDFs** — image-based (scanned) PDFs produce zero transactions. Session 4 adds OCR support via Tesseract.
-- **Full 1099 rule logic** — the current `1099 Eligible` column in Excel is marked "TBD". Session 4 implements full IRS logic (attorney exception, merchandise exclusion, medical payments, etc.).
-- **W-9 tracking** — no persistent vendor master across sessions. Session 4 adds SQLite persistence.
-- **Cross-validation** — no comparison against client-reported amounts. Session 4 adds this.
-- **LLM-based fallback extraction** — when regex fails, the agent should be able to extract transactions directly from raw PDF text. Session 4 adds this tool.
-
-The architecture is designed so all of these are additive improvements — none require changes to the existing code.
-
----
-
-## 🛠️ Tech Stack
-
-**Backend:**
-- FastAPI 0.x
-- pydantic-settings (typed settings)
-- OpenAI Python SDK (journal / term / file analyzer)
-- Claude Agent SDK 0.1.65 (reconciliation orchestration)
-- pdfplumber (PDF table extraction)
-- pandas (data cleaning)
-- openpyxl (Excel generation)
-
-**Frontend:**
-- Next.js 14
-- React 18
-- react-markdown + remark-gfm (Markdown rendering)
-- CSS modules (navy professional theme)
-
-**AI Models:**
-- OpenAI GPT-4o-mini (journal, term, file analyzer)
-- Claude Haiku 4.5 (default agent model)
-- Claude Opus 4.7 (high-quality agent mode)
-
----
-
-## 📝 License & Disclaimer
-
-⚠️ **This application is built for educational and portfolio demonstration purposes.** It is not a substitute for professional accounting advice. Always consult a licensed accountant or CPA for real accounting and tax work.
-
-AI-generated output should be reviewed by a qualified professional before being used in production bookkeeping, tax filings, or financial reporting.
+## 🌐 Bilingual support
+A global language selector (Korean / English / Bilingual) applies to every tool, with a per-tool override where it matters. Korean output follows K-IFRS phrasing; English follows IFRS. In bilingual mode, Korean is shown first, then English.
 
 ---
 
 ## 🗺️ Roadmap
 
-- **v0.4.0** — Journal, term, history, file analyzer (OpenAI GPT-4o-mini)
-- **v0.5.0** ⭐ *(current)* — 1099 pre-reconciliation with rule-based and Claude Agent SDK modes
-- **v0.6.0** *(planned)* — Full 1099 eligibility logic, W-9 tracking, cross-validation, LLM fallback extraction
-- **v0.7.0** *(planned)* — Frontend redesign for professional polish, expanded bilingual coverage
-- **v1.0.0** *(planned)* — Production-ready release with persistent storage, authentication, and multi-client support
+- **v0.5.0** — journal, term, history, file analyzer, 1099 reconciliation (rule-based + Claude Agent).
+- **v0.7.0** ⭐ *(current)* — unified Work History archive, shared PDF ingestion service, bilingual system, and the **Statement Review** add-on (first PREPARE tool).
+- **Next** — bring in PREPARE's `validation_engine` to add the extraction-completeness half of the Statement Review diagnostic.
+- **Then** — **Consolidated Workbook** (PREPARE Tool 2): cross-statement vendor aggregation and $600/entity 1099 eligibility.
+- **Later** — **Data & Document Chat** (CASSIA) and **GL Audit Review Packet** (LUCENT) add-ons.
+- **Housekeeping** — move to a venv-per-app layout to resolve the numpy/langchain vs. numpy 2.x conflict before CASSIA lands, then lock reproducible dependencies.
+
+The architecture is deliberately additive: each add-on plugs into the shared spine without changing the tools already in place.
+
+---
+
+## 🛠️ Tech stack
+
+**Backend:** FastAPI, pydantic-settings, OpenAI Python SDK, Claude Agent SDK, Claude PDF Skill (Sonnet), pdfplumber, pandas, openpyxl, SQLite (stdlib).
+**Frontend:** Next.js, React, react-markdown + remark-gfm, CSS (navy professional theme).
+**AI models:** OpenAI GPT-4o-mini (journal / term / file analyzer); Claude Sonnet via the PDF Skill (statement ingestion); Claude Haiku / Opus (1099 agent orchestration).
+
+---
+
+## ⚠️ Disclaimer
+
+Built for educational and portfolio purposes. It is not a substitute for professional accounting advice — always have AI-generated output reviewed by a qualified accountant or CPA before use in real bookkeeping, tax filings, or financial reporting.
 
 ---
 
 ## 🙏 Acknowledgments
 
-Built as part of an accounting-to-AI-engineering career transition portfolio. Special thanks to the mentor who framed the project around real-world Rowshan & Co. workflow pain points — turning manual 1099 reconciliation chaos into an AI-assisted workflow that could actually save accountants hours per client.
+Built as part of an accounting-to-AI-engineering portfolio, converging a family of real-workflow prototypes into one cohesive hub — turning manual, repetitive accounting chores into an AI-assisted workflow that saves time per client.
 
-Frontend: Next.js | Backend: FastAPI | AI: OpenAI GPT-4o-mini + Claude Agent SDK
+Frontend: Next.js · Backend: FastAPI · AI: OpenAI GPT-4o-mini + Claude Agent SDK + Claude PDF Skill
