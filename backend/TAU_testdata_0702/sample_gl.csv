@@ -1,0 +1,16 @@
+Date,Type,Num,Name,Memo,Account,Amount
+2025-06-02,Deposit,,Brightleaf Customer,Invoice 1042,Checking,4200.0
+2025-06-03,Bill Pmt,ACH,Greenleaf Nursery,Plants,Cost of Goods Sold,-1850.0
+2025-06-07,Check,1021,Maria Sanchez,Subcontract labor,Contract Labor,-900.0
+2025-06-10,Expense,,Home Depot,Tools,Supplies,-412.37
+2025-06-12,Liability,,ADP Payroll,Payroll run,Payroll Expenses,-6500.0
+2025-06-15,Check,1022,"Greenleaf Nursery, LLC",Plants,Cost of Goods Sold,-640.0
+2025-06-18,Deposit,,Brightleaf Customer,Invoice 1051,Checking,3750.0
+2025-06-19,Expense,,Amazon Business,Office supplies,Supplies,-96.32
+2025-06-20,Transfer,,Savings *8842,Transfer,Savings,-2000.0
+2025-06-21,Check,1024,Pacific Equipment Co,Skid steer purchase,Equipment,-45000.0
+2025-06-22,Expense,,Shell Oil,Fuel,Auto & Truck,-78.5
+2025-06-24,Bill Pmt,ACH,United Rentals,Equipment rental,Rent,-875.0
+2025-06-25,Expense,,Cascade Community Bank,Service fee,Bank Charges,-25.0
+2025-06-28,Check,1023,City of Portland,Business license,Taxes & Licenses,-150.0
+2025-06-30,Deposit,,Cascade Community Bank,Interest,Interest Income,2.15

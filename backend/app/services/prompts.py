@@ -1,12 +1,34 @@
 # backend/app/services/prompts.py
 # ============================================================
-# Reused directly from your Streamlit project — no changes
+# Journal / Term prompt builders.
+# CHANGED: added a "Bilingual" path implementing the plan's boundary rule
+#   Korean   -> A only
+#   English  -> B only
+#   Bilingual-> A, then B below (Korean first, then the same in English)
+# The Korean and English bodies below are unchanged from the original.
 # ============================================================
 
 
-def build_journal_prompt(lang: str) -> str:
-    if lang == "한국어":
-        return """당신은 한국 회계 기준(K-IFRS)에 정통한 회계 전문가입니다.
+# Any of these values selects Bilingual output.
+_BILINGUAL_VALUES = {"Bilingual", "이중 언어", "이중언어", "한/영", "KO+EN"}
+
+# Appended to the Korean prompt body for Bilingual mode. Korean (A) is produced
+# first using the format above, then a divider, then the same answer in English (B).
+_BILINGUAL_SUFFIX = """
+
+---
+IMPORTANT — 이중 언어 출력 / BILINGUAL OUTPUT:
+1. 먼저 위 형식 그대로 **한국어**로 전체 답변을 작성하세요.
+2. 그런 다음 구분선 `---` 을 넣으세요.
+3. 마지막으로 동일한 내용을 **English**로 다시 작성하세요 (same structure, same tables).
+Do not merge the two languages; produce Korean fully first, then English fully below."""
+
+
+# ------------------------------------------------------------
+# Journal Entry
+# ------------------------------------------------------------
+
+_JOURNAL_KO = """당신은 한국 회계 기준(K-IFRS)에 정통한 회계 전문가입니다.
 
 사용자가 거래 내용을 설명하면, 아래 단계를 따라 분석하세요:
 
@@ -43,8 +65,8 @@ def build_journal_prompt(lang: str) -> str:
 → 분석: 매출(수익) 발생, 외상매출금(자산) 증가
 → 차변: 외상매출금 500,000 / 대변: 매출 500,000"""
 
-    else:
-        return """You are an accounting expert well-versed in IFRS standards.
+
+_JOURNAL_EN = """You are an accounting expert well-versed in IFRS standards.
 
 When a user describes a transaction, follow these steps:
 
@@ -82,9 +104,11 @@ User: "Sold merchandise for $5,000 on credit"
 → Dr. Accounts Receivable $5,000 / Cr. Sales Revenue $5,000"""
 
 
-def build_term_prompt(lang: str) -> str:
-    if lang == "한국어":
-        return """당신은 회계 교육 전문가입니다.
+# ------------------------------------------------------------
+# Term Explainer
+# ------------------------------------------------------------
+
+_TERM_KO = """당신은 회계 교육 전문가입니다.
 사용자가 회계 용어를 입력하면 아래 형식으로 설명하세요:
 
 ### 📖 용어 설명
@@ -97,8 +121,8 @@ def build_term_prompt(lang: str) -> str:
 ### 💡 실무 팁
 (이 용어가 실무에서 어떻게 쓰이는지 한 줄 설명)"""
 
-    else:
-        return """You are an accounting education expert.
+
+_TERM_EN = """You are an accounting education expert.
 When a user inputs an accounting term, explain it in this format:
 
 ### 📖 Term Explanation
@@ -110,3 +134,23 @@ When a user inputs an accounting term, explain it in this format:
 
 ### 💡 Practical Tip
 (One-line explanation of how this term is used in practice)"""
+
+
+# ------------------------------------------------------------
+# Builders
+# ------------------------------------------------------------
+
+def build_journal_prompt(lang: str) -> str:
+    if lang == "한국어":
+        return _JOURNAL_KO
+    if lang in _BILINGUAL_VALUES:
+        return _JOURNAL_KO + _BILINGUAL_SUFFIX
+    return _JOURNAL_EN
+
+
+def build_term_prompt(lang: str) -> str:
+    if lang == "한국어":
+        return _TERM_KO
+    if lang in _BILINGUAL_VALUES:
+        return _TERM_KO + _BILINGUAL_SUFFIX
+    return _TERM_EN

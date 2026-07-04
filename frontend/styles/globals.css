@@ -584,3 +584,158 @@ body {
   padding-top: 1.5rem;
   line-height: 1.7;
 }
+/* ============================================================
+   TAU foundation — additive styles
+   Paste this block at the END of styles/globals.css.
+   These are NEW, namespaced classes (wh-*, tool-lang). Everything
+   else reuses classes already in your globals.css (nav-item,
+   history-item, submit-btn, stat-card, data-table, etc.), so nothing
+   here overrides your existing rules.
+   ============================================================ */
+
+/* Per-tool language override row */
+.tool-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+.tool-lang select {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.85rem;
+}
+
+/* Work History toolbar (tool filter) */
+.wh-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.wh-filter-label {
+  font-size: 0.9rem;
+  color: #555;
+}
+.wh-filter {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.9rem;
+}
+
+/* Tool badge on each history row */
+.wh-badge {
+  display: inline-block;
+  background: #1F3A5F;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Actions inside an expanded history item */
+.wh-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Shared small button (Save to History, download, delete) */
+.wh-btn {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid #1F3A5F;
+  border-radius: 6px;
+  background: #1F3A5F;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+.wh-btn:hover { opacity: 0.9; }
+.wh-btn:disabled { opacity: 0.5; cursor: default; }
+
+.wh-btn-danger {
+  background: #fff;
+  color: #b00020;
+  border-color: #e0b4bc;
+}
+.wh-btn-danger:hover { background: #fdecee; }
+/* ============================================================
+   TAU — Statement Review add-on styles
+   Paste at the END of styles/globals.css (after the earlier wh-* block).
+   New namespaced classes only (sr-*); nothing here overrides existing rules.
+   ============================================================ */
+
+/* Activity breakdown chips */
+.sr-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0.25rem;
+}
+.sr-chip {
+  background: #EEF2F7;
+  color: #33415C;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Reconciliation panel */
+.sr-recon {
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  max-width: 460px;
+  background: #FBFCFE;
+}
+.sr-recon-row {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #EDF1F6;
+}
+.sr-recon-row:last-of-type { border-bottom: none; }
+.sr-recon-row span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.sr-op { color: #8A94A6; font-weight: 700; text-align: center; }
+.sr-recon-total { font-weight: 700; border-top: 2px solid #CBD5E1; }
+
+.sr-verdict {
+  margin-top: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 700;
+  text-align: center;
+}
+.sr-balanced { background: #E6F4EA; color: #1E7E34; }
+.sr-off { background: #FDECEE; color: #B00020; }
+.sr-notes {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #667085;
+  font-style: italic;
+}
+
+/* Excluded rows in the classification table */
+.sr-excluded { background: #F7F8FA; color: #98A2B3; }
+.sr-excluded td { color: #98A2B3; }
+
+/* Low-key review flag */
+.sr-flag { margin-left: 6px; color: #C99A00; font-size: 0.85em; }

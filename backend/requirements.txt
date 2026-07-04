@@ -1,7 +1,36 @@
-et_xmlfile==2.0.0
+# TAU (Transaction Agent Ultimate) — backend requirements
+# Curated from the app's actual imports. Pinned where a version matters;
+# loose elsewhere. Replaces the previous 7-line file.
+#
+# NOTE: your machine currently installs into the global framework Python
+# (that's why versions drifted). The clean long-term fix is a dedicated
+# venv per app, then `pip3 freeze > requirements.txt`. Until then, this
+# curated list captures TAU's real deps with the pins that bit you.
+
+# ── Web framework ──
+fastapi
+uvicorn[standard]           # pulls uvloop + watchfiles (the --reload you use)
+python-multipart==0.0.26    # required for UploadFile / form uploads
+
+# ── Settings / models ──
+pydantic>=2.7
+pydantic-settings==2.14.2
+python-dotenv
+
+# ── AI providers ──
+openai
+httpx<0.28                  # avoids the openai/httpx "proxies" TypeError.
+                           # If you later `pip3 install --upgrade openai`,
+                           # you can remove this pin.
+claude-agent-sdk           # reconcile "agent" mode + the coming PDF service
+
+# ── Data / files ──
+pandas
 numpy==2.4.4
 openpyxl==3.1.5
-pandas==3.0.2
+pdfplumber                 # File Analyzer + rule-based statement extraction
+
+# ── Transitive but pinned in your original file ──
+et-xmlfile==2.0.0
 python-dateutil==2.9.0.post0
-python-multipart==0.0.26
 six==1.17.0
