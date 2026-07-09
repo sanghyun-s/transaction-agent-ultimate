@@ -11,3 +11,10 @@ frontend/.next/
 # Reconciliation runtime outputs
 backend/reconciliation_outputs/
 .DS_Store
+
+# Work History runtime DB (may contain real client data)
+backend/tau_history.db
+# Consolidated Workbook runtime outputs
+backend/consolidated_outputs/
+# Copied-in Claude PDF Skill (install locally, not committed)
+.claude/

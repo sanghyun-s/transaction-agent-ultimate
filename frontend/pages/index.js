@@ -14,6 +14,7 @@ import Reconcile from "../components/tools/Reconcile";
 import StatementReview from "../components/tools/StatementReview";
 import WorkHistory from "../components/WorkHistory";
 import { t } from "../components/i18n";
+import ConsolidatedWorkbook from "../components/tools/ConsolidatedWorkbook";
 
 export default function Home() {
   const [activePage, setActivePage] = useState("journal");
@@ -44,16 +45,7 @@ export default function Home() {
           {activePage === "file" && <FileAnalyzer language={language} />}
           {activePage === "reconcile" && <Reconcile language={language} />}
           {activePage === "statement" && <StatementReview language={language} />}
-
-          <div className="footer">
-            ⚠️ {t(
-              "이 앱은 학습 목적으로 만들어졌습니다. 실제 회계 처리 시에는 반드시 전문가와 상의하세요.",
-              "This app is for learning purposes. Always consult a professional for real accounting work.",
-              language
-            )}
-            <br />
-            Frontend: Next.js | Backend: FastAPI | AI: OpenAI GPT-4o-mini + Claude Agent SDK
-          </div>
+          {activePage === "consolidated" && <ConsolidatedWorkbook language={language} />}
         </div>
       </main>
     </div>

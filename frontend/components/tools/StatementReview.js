@@ -53,6 +53,7 @@ export default function StatementReview({ language }) {
   };
 
   const recon = result?.reconciliation;
+  const ec = result?.extraction_check;   // Source B — extraction completeness
 
   const historyMarkdown = () => {
     if (!result) return "";
@@ -72,6 +73,9 @@ export default function StatementReview({ language }) {
       L.push(`- = **Calculated ending: ${money(recon.calculated_ending)}**`);
       L.push(`- Reported ending: ${money(recon.reported_ending_balance)}`);
       L.push(`- Difference: ${money(recon.difference)} → ${recon.balanced ? "**Balanced ✓**" : "**Off ⚠**"}`);
+    }
+    if (ec && ec.status !== "unavailable") {
+      L.push(`- Extraction check: ${ec.status === "complete" ? "**complete ✓**" : "**incomplete ⚠**"}${ec.lumped_debits ? " (lumped debits)" : ""}`);
     }
     L.push("", "## Transactions", "| Date | Description | Amount | Type | 1099 |", "|---|---|---|---|---|");
     result.transactions.forEach((r) => {
@@ -173,6 +177,23 @@ export default function StatementReview({ language }) {
             <div className="info-msg">{recon?.reason || t("정밀 분석(Skill)에서 대사가 제공됩니다.", "Reconciliation is available in Full (Skill) analysis.", language)}</div>
           )}
 
+          {/* Extraction completeness (Source B) — low-key line under the reconciliation panel.
+             Only shown on Skill runs where a stated summary exists to compare against. */}
+          {ec && ec.status !== "unavailable" && (
+            <div style={{ marginTop: "10px", fontSize: "0.85rem", display: "flex", alignItems: "center", gap: "6px",
+                 color: ec.status === "complete" ? "#1a7f4b" : "#B26A00" }}>
+              <span>{ec.status === "complete" ? "✓" : "⚠"}</span>
+              <span>
+                {ec.status === "complete"
+                  ? t("추출 완결성: 추출된 행 합계가 명세서 기재 활동 합계와 일치합니다.",
+                      "Extraction check: extracted rows sum to the statement's stated activity totals.", language)
+                  : t("추출 완결성: 행 합계가 기재 합계와 일치하지 않습니다 — 누락·오분류 가능성이 있어 검토를 권장합니다.",
+                      "Extraction check: rows don't sum to the stated totals — possible missed/miscounted rows, review suggested.", language)}
+                {ec.lumped_debits ? t(" (단일 출금 합계 기준 비교)", " (compared against a single lumped-debits total)", language) : null}
+              </span>
+            </div>
+          )}
+
           {/* Classified transactions */}
           <h3 style={{ marginTop: "24px", marginBottom: "8px" }}>📋 {t("거래 분류", "Row-level Classification", language)}</h3>
           <div className="table-wrapper">
@@ -209,7 +230,7 @@ export default function StatementReview({ language }) {
                 tool_name: "statement_review",
                 title: result.filename || "statement",
                 language,
-                input_summary: `${result.included_count}/${result.transactions.length} included${recon?.available ? ` · recon ${recon.balanced ? "balanced" : "off"}` : ""}`,
+                input_summary: `${result.included_count}/${result.transactions.length} included${recon?.available ? ` · recon ${recon.balanced ? "balanced" : "off"}` : ""}${ec && ec.status !== "unavailable" ? ` · extract ${ec.status}` : ""}`,
                 output_content: historyMarkdown(),
                 output_format: "markdown",
               })}

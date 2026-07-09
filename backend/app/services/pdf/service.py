@@ -15,6 +15,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from .reconciliation import compute_reconciliation
+from .source_b import compute_source_b
 
 
 def _txn_from_obj(t) -> dict:
@@ -87,6 +88,7 @@ def _ingest_rule(pdf_path: str, source: str) -> dict:
             "breakdown": breakdown,
             "reconciliation_snapshot": {},  # rule engine doesn't transcribe stated balances
             "reconciliation": {"available": False, "reason": "Run Full (Skill) analysis to reconcile."},
+            "extraction_check": {"status": "unavailable"},
             "metadata": {"pages_processed": result.pages_processed, "confidence": result.confidence},
             "warnings": result.warnings,
             "cost_usd": 0.0,
@@ -111,6 +113,7 @@ def _ingest_skill(pdf_path: str, model: str) -> dict:
         }
     txns = [_txn_from_dict(d) for d in r.all_transactions]
     included, excluded, breakdown = _summarize(txns)
+    reconciliation = compute_reconciliation(r.reconciliation_snapshot)
     return {
         "success": True,
         "engine": "skill",
@@ -122,7 +125,8 @@ def _ingest_skill(pdf_path: str, model: str) -> dict:
         "included_total": _included_total(txns),
         "breakdown": breakdown or r.breakdown,
         "reconciliation_snapshot": r.reconciliation_snapshot,
-        "reconciliation": compute_reconciliation(r.reconciliation_snapshot),
+        "reconciliation": reconciliation,
+        "extraction_check": compute_source_b(txns, reconciliation, r.reconciliation_snapshot),
         "metadata": r.metadata,
         "warnings": [],
         "cost_usd": r.cost_usd,
