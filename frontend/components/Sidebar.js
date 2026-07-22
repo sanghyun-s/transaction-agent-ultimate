@@ -18,6 +18,7 @@ export default function Sidebar({ activePage, onNavigate, language, onLanguageCh
     { id: "reconcile", label: `📑 ${t("1099 워크시트", "1099 Worksheet", language)}` },
     { id: "statement", label: `📄 ${t("명세서 검토", "Statement Review", language)}` },
     { id: "consolidated", label: `📘 ${t("통합 워크북", "Consolidated Workbook", language)}` },
+    { id: "chat", label: `💬 ${t("데이터·문서 채팅", "Data & Document Chat", language)}` },
   ];
 
   return (
