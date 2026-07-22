@@ -1,10 +1,10 @@
 # 📊 Transaction Agent Ultimate (TAU)
 
-**An AI-powered accounting utility hub** — a **FastAPI backend** and **Next.js frontend** that brings journal-entry generation, terminology help, file analysis, statement review, cross-statement consolidation, and an end-to-end 1099 workflow together in one bilingual (Korean / English) interface.
+**An AI-powered accounting utility hub** — a **FastAPI backend** and **Next.js frontend** that brings journal-entry generation, terminology help, file analysis, statement review, cross-statement consolidation, conversational data & document Q&A, and an end-to-end 1099 workflow together in one bilingual (Korean / English) interface.
 
 TAU is designed to **converge a family of accounting tools into a single hub.** Rather than shipping separate apps, each capability is folded in as a compact, function-named **add-on** that sits on a shared spine — one unified work archive, one PDF ingestion engine, one language setting. Standalone prototypes (PREPARE, CASSIA, LUCENT) are being reduced to add-ons and brought in one at a time.
 
-> **Version 0.8.0** — adds the second PREPARE add-on, **Consolidated Workbook** (cross-statement vendor aggregation + master Excel workbook), and completes the statement diagnostic with **Source B** (extraction-completeness), now shared by both statement tools.
+> **Version 0.9.0** — adds the first CASSIA add-on, **Data & Document Chat**: a chat-first assistant that answers general accounting questions, queries an uploaded CSV/Excel via text-to-SQL, or retrieves from an uploaded PDF via RAG. Session-scoped and fully in-memory (no ChromaDB, no LangChain, no new dependencies). Routing is schema-aware rather than keyword-based, so it works in either language without a per-language word list.
 
 ---
 
@@ -57,11 +57,22 @@ The vendor-level, cross-statement view. Upload **multiple** statements (plus an 
 - **5-sheet master workbook** — Executive Summary (with Source-A reconciliation and Source-B extraction roll-ups), Master Vendor Summary, Validation Report, All Transactions, Per-Agent Summary.
 - Lean by design: the on-screen surface is upload → build → one status line → **Download workbook**. All detail lives in the workbook. Default engine is the Skill; the rule engine is offered as a rough, free quick preview.
 
+#### 8. 💬 Data & Document Chat — *first CASSIA add-on*
+A chat-first assistant. The thread and composer are always available; **upload is a side action**, not a gateway. Each question routes automatically, based on what's loaded rather than on keywords:
+- **General** — with nothing loaded, answers general accounting/tax questions directly.
+- **SQL** — a CSV/Excel loads into an in-memory SQLite table; the model writes a **read-only** `SELECT`, it runs, and the result is explained (e.g. "how many vendors are missing a W-9?" → 11).
+- **RAG** — a PDF is chunked, embedded, and retrieved via **in-memory cosine top-k**, then answered from the document (e.g. "what is the mileage reimbursement rate?" → 58¢/mile).
+
+Routing is **schema-aware, not keyword-based**: with both a table and a document loaded, the model tries SQL and — if the schema genuinely can't answer — reports back so the question falls through to RAG. Because the decision comes from reading the schema rather than matching words, it works the same in Korean and English with no per-language keyword list. Explicit intent ("read the PDF" / "표에서") overrides.
+
+A PDF is ingested two ways at once: as text chunks for RAG **and**, when it contains ruled tables, as rows in the same SQLite database — so a statement's figures can be answered exactly by SQL (e.g. "total deposits in July" → $19,775.35) rather than read off the prose. Accuracy touches include schema sample values, normalized ISO date columns, per-page period labels, and a guard that routes a suspicious empty result to RAG instead of reporting a confident zero.
+
+Deliberately reduced from full CASSIA — no charts, no auth, no durable multi-session memory, no persistent "core." A **single sticky session** (survives refresh, dies on tab close) with a **New chat** reset. Bilingual; saves the whole thread to Work History.
+
 ### Planned add-ons (the convergence roadmap)
 
 | Add-on | Source app | Function |
 |--------|-----------|----------|
-| **Data & Document Chat** | CASSIA | Conversational retrieval over your own records and documents. |
 | **GL Audit Review Packet** | LUCENT | Pre-audit checks and a review packet over the general ledger. |
 
 Each is a compact add-on renamed by function, built on the same shared spine.
@@ -85,6 +96,7 @@ Each is a compact add-on renamed by function, built on the same shared spine.
 │                         │                        │   • pdf          /api/pdf/ingest│
 │                         │                        │   • consolidated /api/          │
 │                         │                        │                  consolidated/* │
+│                         │                        │   • chat         /api/chat/*    │
 └─────────────────────────┘                        └───────────┬─────────────────────┘
                                                                 │
         ┌───────────────────────────────┬───────────────────────┼───────────────────────┐
@@ -96,7 +108,7 @@ Each is a compact add-on renamed by function, built on the same shared spine.
 └────────────────────┘   └────────────────────┘   └────────────────────┘   └────────────────────┘
 ```
 
-The backend is organized into routers, with a shared `app/services/pdf/` package (ingestion + Source A + Source B) that both statement tools consume. The **Consolidated Workbook** add-on adds an `app/services/consolidated/` package that calls the shared PDF service per statement, then does the cross-statement aggregation, validation, and master-workbook generation on top.
+The backend is organized into routers, with a shared `app/services/pdf/` package (ingestion + Source A + Source B) that both statement tools consume. The **Consolidated Workbook** add-on adds an `app/services/consolidated/` package that calls the shared PDF service per statement, then does the cross-statement aggregation, validation, and master-workbook generation on top. The **Data & Document Chat** add-on adds a self-contained `app/services/chat/` package — a schema-aware router, in-memory text-to-SQL, and in-memory RAG — with ChromaDB replaced by a NumPy cosine search, so it runs entirely on TAU's existing dependencies.
 
 ---
 
@@ -112,7 +124,7 @@ transaction-agent-ultimate/
 │   ├── requirements.txt
 │   ├── tau_history.db                  # Work History (SQLite; not committed)
 │   └── app/
-│       ├── main.py                     # app factory, mounts routers (v0.8.0)
+│       ├── main.py                     # app factory, mounts routers (v0.9.0)
 │       ├── config.py                   # typed settings
 │       ├── db.py                        # SQLite init (history table)
 │       ├── routers/
@@ -121,7 +133,8 @@ transaction-agent-ultimate/
 │       │   ├── reconcile.py            # /api/reconcile/*
 │       │   ├── history.py              # /api/history/*  (unified archive)
 │       │   ├── pdf.py                  # /api/pdf/ingest (shared PDF service)
-│       │   └── consolidated.py         # /api/consolidated/* (Consolidated Workbook)
+│       │   ├── consolidated.py         # /api/consolidated/* (Consolidated Workbook)
+│       │   └── chat.py                 # /api/chat/* (Data & Document Chat)
 │       ├── services/
 │       │   ├── openai_service.py
 │       │   ├── prompts.py              # + bilingual (KO / EN / Bilingual)
@@ -145,6 +158,12 @@ transaction-agent-ultimate/
 │       │       ├── validation_engine.py        # cross-statement validation
 │       │       ├── master_excel_generator.py   # 5-sheet master workbook
 │       │       └── service.py                  # consolidate() facade
+│       │   └── chat/                    # ⭐ Data & Document Chat package (in-memory)
+│       │       ├── text_splitter.py            # recursive chunker (no LangChain)
+│       │       ├── router.py                    # schema-aware sql / rag / general routing
+│       │       ├── sql_engine.py                # CSV/Excel + PDF tables → in-memory SQLite
+│       │       ├── rag_engine.py                # context-preserving chunks → cosine top-k
+│       │       └── service.py                   # facade + session store
 │       └── models/
 │           ├── schemas.py
 │           ├── file_schemas.py
@@ -168,7 +187,8 @@ transaction-agent-ultimate/
     │       ├── FileAnalyzer.js
     │       ├── Reconcile.js
     │       ├── StatementReview.js       # Source A + Source B
-    │       └── ConsolidatedWorkbook.js  # ⭐ new
+    │       ├── ConsolidatedWorkbook.js
+    │       └── DataDocumentChat.js       # ⭐ new
     └── styles/globals.css
 ```
 
@@ -189,12 +209,18 @@ transaction-agent-ultimate/
 | POST | `/api/reconcile/agent` | Claude-Agent 1099 reconciliation |
 | GET | `/api/reconcile/download/{id}` | Download the generated Excel |
 | POST | `/api/pdf/ingest` | Shared statement ingestion → classified rows + Source A + Source B |
-| POST | `/api/consolidated/analyze` | ⭐ Multi-statement consolidation → master workbook |
-| GET | `/api/consolidated/download/{req_id}/{file}` | ⭐ Download the master workbook |
+| POST | `/api/consolidated/analyze` | Multi-statement consolidation → master workbook |
+| GET | `/api/consolidated/download/{req_id}/{file}` | Download the master workbook |
+| POST | `/api/chat/upload` | ⭐ Load a CSV/Excel/PDF into a chat session (side action) |
+| POST | `/api/chat/ask` | ⭐ Ask a question → routed to SQL / RAG / general |
+| POST | `/api/chat/reset` | ⭐ Clear the chat session (new blank chat) |
+| GET | `/api/chat/state` | ⭐ What's currently loaded in the session |
 
 `/api/pdf/ingest` accepts `pdf_file`, `engine` (`skill` \| `rule`), `model`, and `source`, and returns classified transactions, an activity breakdown, a `reconciliation` block (Source A), and an `extraction_check` block (Source B).
 
 `/api/consolidated/analyze` accepts multiple `pdf_files[]`, an optional `vendor_csv`, plus `engine` and `model`, and returns a per-statement summary, cross-statement validation, and a downloadable 5-sheet master workbook.
+
+`/api/chat/upload` accepts a `session_id` and a `file` (CSV/Excel → SQL table; PDF → RAG chunks, plus any ruled tables into SQLite). `/api/chat/ask` takes a `session_id`, `question`, and `language`, and returns the answer plus the route taken (`sql` / `rag` / `general`).
 
 ---
 
@@ -252,9 +278,10 @@ A global language selector (Korean / English / Bilingual) applies to every tool,
 
 - **v0.5.0** — journal, term, history, file analyzer, 1099 reconciliation (rule-based + Claude Agent).
 - **v0.7.0** — unified Work History archive, shared PDF ingestion service, bilingual system, and the **Statement Review** add-on (first PREPARE tool).
-- **v0.8.0** ⭐ *(current)* — the **Consolidated Workbook** add-on (second PREPARE tool: cross-statement vendor aggregation + 5-sheet master workbook), and **Source B** extraction-completeness, now shared by both statement tools.
-- **Next** — **Data & Document Chat** (CASSIA) and **GL Audit Review Packet** (LUCENT) add-ons.
-- **Housekeeping** — move to a venv-per-app layout to resolve the numpy/langchain vs. numpy 2.x conflict before CASSIA lands, then lock reproducible dependencies.
+- **v0.8.0** — the **Consolidated Workbook** add-on (second PREPARE tool: cross-statement vendor aggregation + 5-sheet master workbook), and **Source B** extraction-completeness, now shared by both statement tools.
+- **v0.9.0** ⭐ *(current)* — the **Data & Document Chat** add-on (first CASSIA tool: general Q&A + text-to-SQL + RAG, fully in-memory), with schema-aware routing and PDF-table querying. Reduced hard from full CASSIA — no charts, auth, or persistent core.
+- **Next** — **GL Audit Review Packet** (LUCENT) add-on. Data & Document Chat enhancements: pivot key/value summary blocks into named columns, and broaden ingestion (non-ruled/scanned PDFs, non-US number and non-UTF-8 encodings).
+- **Before any outside-user deployment** — server-issued session IDs and session-store eviction for the chat add-on (the current client-generated session ID and module-level store are intended for local single-user use).
 
 The architecture is deliberately additive: each add-on plugs into the shared spine without changing the tools already in place.
 
@@ -262,9 +289,9 @@ The architecture is deliberately additive: each add-on plugs into the shared spi
 
 ## 🛠️ Tech stack
 
-**Backend:** FastAPI, pydantic-settings, OpenAI Python SDK, Claude Agent SDK, Claude PDF Skill (Sonnet), pdfplumber, pandas, openpyxl, SQLite (stdlib).
+**Backend:** FastAPI, pydantic-settings, OpenAI Python SDK, Claude Agent SDK, Claude PDF Skill (Sonnet), pdfplumber, pandas, openpyxl, SQLite (stdlib), NumPy (in-memory vector search for the chat add-on — no ChromaDB/LangChain).
 **Frontend:** Next.js, React, react-markdown + remark-gfm, CSS (navy professional theme).
-**AI models:** OpenAI GPT-4o-mini (journal / term / file analyzer); Claude Sonnet via the PDF Skill (statement ingestion + consolidation); Claude Haiku / Opus (1099 agent orchestration).
+**AI models:** OpenAI GPT-4o-mini (journal / term / file analyzer / Data & Document Chat) and text-embedding-3-small (chat RAG retrieval); Claude Sonnet via the PDF Skill (statement ingestion + consolidation); Claude Haiku / Opus (1099 agent orchestration).
 
 ---
 
