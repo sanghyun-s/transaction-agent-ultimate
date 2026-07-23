@@ -34,3 +34,4 @@ pdfplumber                 # File Analyzer + rule-based statement extraction
 et-xmlfile==2.0.0
 python-dateutil==2.9.0.post0
 six==1.17.0
+scikit-learn>=1.3

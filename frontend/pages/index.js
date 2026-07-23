@@ -14,8 +14,9 @@ import Reconcile from "../components/tools/Reconcile";
 import StatementReview from "../components/tools/StatementReview";
 import WorkHistory from "../components/WorkHistory";
 import { t } from "../components/i18n";
-import ConsolidatedWorkbook from "../components/tools/ConsolidatedWorkbook"
+import ConsolidatedWorkbook from "../components/tools/ConsolidatedWorkbook";
 import DataDocumentChat from "../components/tools/DataDocumentChat";
+import GLAuditReviewPacket from "../components/tools/GLAuditReviewPacket";
 
 export default function Home() {
   const [activePage, setActivePage] = useState("journal");
@@ -48,6 +49,7 @@ export default function Home() {
           {activePage === "statement" && <StatementReview language={language} />}
           {activePage === "consolidated" && <ConsolidatedWorkbook language={language} />}
           {activePage === "chat" && <DataDocumentChat language={language} />}
+          {activePage === "glreview" && <GLAuditReviewPacket language={language} />}
         </div>
       </main>
     </div>

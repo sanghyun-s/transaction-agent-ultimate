@@ -1,0 +1,466 @@
+date,amount,account_code,account_name,vendor,description,journal_ref
+2024-06-12,3751.83,5100,Consulting Fees,Grainger Industrial,,JE1448
+2024-02-20,11878.57,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1238
+2024-08-12,9823.13,6000,Salaries,Metro Utilities,Salaries payment to Metro Utilities,JE1196
+2024-02-13,5148.69,5100,Consulting Fees,Summit Travel,Consulting Fees payment to Summit Travel,JE1179
+2024-01-24,3293.93,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1011
+2024-08-19,162.68,5000,Office Supplies,Summit Travel,Office Supplies payment to Summit Travel,JE1343
+2024-02-29,9357.39,6000,Salaries,BlueLine Software,Salaries payment to BlueLine Software,JE1270
+2024-06-14,1650.99,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1033
+2024-12-10,3866.17,7000,Equipment,Payroll Partners,Equipment payment to Payroll Partners,JE1112
+2024-10-11,3050.06,5100,Consulting Fees,BlueLine Software,Consulting Fees payment to BlueLine Software,JE1161
+2024-08-14,4213.36,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1318
+2024-09-10,6041.44,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1228
+2024-08-28,448.17,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1200
+2024-10-16,5803.61,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1150
+2024-02-06,4321.1,5100,Consulting Fees,Ironwood Supply,Consulting Fees payment to Ironwood Supply,JE1043
+2024-12-06,8036.58,6000,Salaries,BlueLine Software,Salaries payment to BlueLine Software,JE1300
+2024-03-21,622.37,5000,Office Supplies,Metro Utilities,Office Supplies payment to Metro Utilities,JE1061
+2024-12-11,4480.14,7000,Equipment,Grainger Industrial,Equipment payment to Grainger Industrial,JE1234
+2024-04-23,7309.08,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1334
+2024-12-06,3044.74,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1105
+2024-07-09,1393.62,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1374
+2024-11-29,4662.63,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1141
+2024-02-16,3211.17,5100,Consulting Fees,BlueLine Software,Consulting Fees payment to BlueLine Software,JE1377
+2024-04-29,1413.63,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1282
+2024-11-29,2042.94,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1346
+2024-06-07,2920.03,7000,Equipment,Ironwood Supply,Equipment payment to Ironwood Supply,JE1257
+2024-10-14,7765.75,6000,Salaries,BlueLine Software,Salaries payment to BlueLine Software,JE1423
+2024-10-19,4657.68,7000,Equipment,BlueLine Software,Equipment weekend entry,JE1443
+2024-11-29,7707.87,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1297
+2024-07-15,9390.07,6000,Salaries,CloudWorks Inc,Salaries payment to CloudWorks Inc,JE1218
+2024-08-23,8727.9,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1328
+2024-11-21,913.36,5200,Software Subscriptions,Payroll Partners,Software Subscriptions payment to Payroll Partners,JE1255
+2024-08-27,894.1,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1262
+2024-04-17,7747.62,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1014
+2024-04-08,1171.67,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1168
+2024-08-26,613.63,6100,Travel,Wexler LLC,Travel one-off,JE1450
+2024-09-16,983.62,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1220
+2024-03-19,967.55,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1301
+2024-03-21,461.45,5200,Software Subscriptions,Metro Utilities,,JE1446
+2024-06-12,8854.51,6000,Salaries,Rivera Consulting,Salaries payment to Rivera Consulting,JE1427
+2024-12-09,9085.2,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1273
+2024-08-28,2173.31,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1091
+2024-08-05,11848.91,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1248
+2024-06-21,3762.07,5100,Consulting Fees,CloudWorks Inc,Consulting Fees payment to CloudWorks Inc,JE1006
+2024-12-03,7391.33,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1093
+2024-02-02,2205.56,5100,Consulting Fees,CloudWorks Inc,Consulting Fees payment to CloudWorks Inc,JE1401
+2024-04-12,1564.64,6100,Travel,Summit Travel,Travel payment to Summit Travel,JE1425
+2024-01-15,1436.25,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1212
+2024-09-06,6601.42,6000,Salaries,Payroll Partners,Salaries payment to Payroll Partners,JE1132
+2024-10-21,293.07,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1329
+2024-02-11,407.11,6100,Travel,Ironwood Supply,Travel weekend entry,JE1442
+2024-09-24,6076.29,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1180
+2024-08-26,1030.38,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1108
+2024-04-01,1030.71,6100,Travel,Summit Travel,Travel payment to Summit Travel,JE1096
+2024-10-23,1258.61,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1064
+2024-08-30,2472.75,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1046
+2024-04-03,832.83,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1158
+2024-04-29,5451.72,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1012
+2024-08-15,9401.73,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1276
+2024-12-27,4638.5,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1127
+2024-02-16,974.7,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1314
+2024-11-22,1510.44,6100,Travel,Summit Travel,Travel payment to Summit Travel,JE1266
+2024-09-19,1391.82,6100,Travel,CloudWorks Inc,Travel payment to CloudWorks Inc,JE1376
+2024-12-10,1509.28,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1199
+2024-08-14,4619.77,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1081
+2024-12-31,350.97,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1426
+2024-01-29,3082.27,5100,Consulting Fees,Ironwood Supply,Consulting Fees payment to Ironwood Supply,JE1240
+2024-02-12,1691.95,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1136
+2024-09-20,305.04,5000,Office Supplies,Summit Travel,Office Supplies payment to Summit Travel,JE1111
+2024-06-04,20,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1107
+2024-08-07,88.46,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1151
+2024-09-23,5631.79,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1123
+2024-05-02,5165.11,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1067
+2024-12-03,1541.29,5100,Consulting Fees,CloudWorks Inc,Consulting Fees payment to CloudWorks Inc,JE1110
+2024-03-01,272.23,5000,Office Supplies,Metro Utilities,Office Supplies payment to Metro Utilities,JE1215
+2024-09-04,9027.82,6000,Salaries,Metro Utilities,,JE1447
+2024-03-26,758.34,5200,Software Subscriptions,BlueLine Software,Software Subscriptions payment to BlueLine Software,JE1412
+2024-01-01,1166.47,6100,Travel,BlueLine Software,Travel payment to BlueLine Software,JE1100
+2024-05-28,8507.79,6000,Salaries,Apex Holdings,Salaries one-off,JE1452
+2024-06-19,6895.95,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1355
+2024-10-22,106.28,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1010
+2024-03-19,1196.87,5200,Software Subscriptions,BlueLine Software,Software Subscriptions payment to BlueLine Software,JE1366
+2024-10-18,1481.28,5200,Software Subscriptions,Summit Travel,Software Subscriptions payment to Summit Travel,JE1182
+2024-07-18,9683.6,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1057
+2024-12-10,3104.03,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1048
+2024-08-22,4982.0,5100,Consulting Fees,Payroll Partners,Consulting near-limit,JE1459
+2024-08-06,1482.66,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1121
+2024-10-28,1542.55,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1333
+2024-08-05,1844.21,7000,Equipment,Payroll Partners,Equipment payment to Payroll Partners,JE1190
+2024-12-18,2782.48,7000,Equipment,Payroll Partners,Equipment payment to Payroll Partners,JE1017
+2024-02-08,368.19,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1338
+2024-01-04,1212.39,6100,Travel,BlueLine Software,Travel payment to BlueLine Software,JE1130
+2024-03-05,438.87,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1036
+2024-04-22,482.72,6100,Travel,BlueLine Software,Travel payment to BlueLine Software,JE1004
+2024-02-22,849.43,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1174
+2024-12-18,4472.95,5100,Consulting Fees,Ironwood Supply,Consulting Fees payment to Ironwood Supply,JE1186
+2024-09-03,1402.22,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1261
+2024-11-19,807.11,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1353
+2024-11-01,422.95,5000,Office Supplies,Metro Utilities,Office Supplies payment to Metro Utilities,JE1389
+2024-05-03,309.09,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1397
+2024-07-29,615.02,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1204
+2024-05-01,753.75,5000,Office Supplies,Ironwood Supply,Office Supplies payment to Ironwood Supply,JE1054
+2024-01-04,7578.89,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1005
+2024-01-18,3116.08,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1417
+2024-08-21,2999.85,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1249
+2024-10-21,9622.94,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1251
+2024-05-28,647.87,6100,Travel,Summit Travel,,JE1444
+2024-04-24,7969.14,7000,Equipment,Payroll Partners,Equipment payment to Payroll Partners,JE1000
+2024-11-26,6915.9,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1360
+2024-10-03,1283.2,6100,Travel,CloudWorks Inc,Travel payment to CloudWorks Inc,JE1032
+2024-05-07,8205.94,6000,Salaries,Rivera Consulting,Salaries payment to Rivera Consulting,JE1050
+2024-12-26,8486.01,6000,Salaries,BlueLine Software,Salaries payment to BlueLine Software,JE1326
+2024-09-16,6760.11,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1364
+2024-08-26,1751.67,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1155
+2024-01-08,207.85,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1231
+2024-07-04,8136.76,6000,Salaries,Payroll Partners,Salaries payment to Payroll Partners,JE1277
+2024-03-20,3481.32,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1059
+2024-05-16,1246.51,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1408
+2024-01-23,552.63,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1290
+2024-11-12,4474.78,7000,Equipment,Ironwood Supply,Equipment payment to Ironwood Supply,JE1236
+2024-10-03,261.14,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1284
+2024-10-08,378.93,5000,Office Supplies,Metro Utilities,Office Supplies payment to Metro Utilities,JE1053
+2024-09-17,6475.35,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1216
+2024-11-25,1035.43,6100,Travel,BlueLine Software,Travel payment to BlueLine Software,JE1358
+2024-10-11,1371.02,5200,Software Subscriptions,Summit Travel,Software Subscriptions payment to Summit Travel,JE1058
+2024-02-19,216.32,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1007
+2024-11-25,782.88,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1399
+2024-08-26,3470.82,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1144
+2024-08-15,2623.3,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1420
+2024-06-20,728.16,5200,Software Subscriptions,Payroll Partners,Software Subscriptions payment to Payroll Partners,JE1125
+2024-05-07,8986.37,6000,Salaries,Metro Utilities,Salaries payment to Metro Utilities,JE1052
+2024-02-27,4410.47,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1029
+2024-04-11,699.0,5200,Software Subscriptions,Payroll Partners,Software Subscriptions payment to Payroll Partners,JE1113
+2024-09-05,3618.86,5100,Consulting Fees,Summit Travel,Consulting Fees payment to Summit Travel,JE1133
+2024-12-11,4466.9,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1198
+2024-10-28,4484.6,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1042
+2024-04-18,3912.45,5100,Consulting Fees,BlueLine Software,Consulting Fees payment to BlueLine Software,JE1038
+2024-07-31,4295.14,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1274
+2024-12-16,7420.47,6000,Salaries,BlueLine Software,,JE1445
+2024-05-01,500,5100,Consulting Fees,Ironwood Supply,Consulting Fees round payment,JE1431
+2024-08-16,4321.25,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1222
+2024-07-01,9411.41,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1396
+2024-05-28,6810.3,6000,Salaries,BlueLine Software,Salaries payment to BlueLine Software,JE1330
+2024-02-06,3267.71,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1327
+2024-05-15,8229.53,7000,Equipment,Payroll Partners,Equipment payment to Payroll Partners,JE1184
+2024-02-08,7947.21,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1232
+2024-07-22,56.0,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1421
+2024-05-15,8623.64,7000,Equipment,Payroll Partners,Equipment payment to Payroll Partners,JE1189
+2024-01-15,7503.34,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1311
+2024-04-03,5571.31,7000,Equipment,BlueLine Software,Equipment payment to BlueLine Software,JE1137
+2024-10-31,1105.87,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1120
+2024-06-13,1478.35,6100,Travel,Summit Travel,Travel payment to Summit Travel,JE1410
+2024-10-17,7827.25,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1316
+2024-12-13,1044.39,5200,Software Subscriptions,BlueLine Software,Software Subscriptions payment to BlueLine Software,JE1095
+2024-12-19,1243.46,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1332
+2024-12-31,2312.16,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1039
+2024-01-23,5598.69,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1402
+2024-10-29,151.79,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1229
+2024-05-23,7553.7,6000,Salaries,Payroll Partners,Salaries payment to Payroll Partners,JE1159
+2024-06-07,262.49,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1356
+2024-08-29,4568.76,7000,Equipment,Ironwood Supply,Equipment payment to Ironwood Supply,JE1382
+2024-05-22,3226.18,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1094
+2024-07-30,1787.32,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1209
+2024-11-05,3502.77,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1347
+2024-12-24,6083.94,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1195
+2024-11-20,102.94,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1079
+2024-07-31,5611.65,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1128
+2024-11-06,436.57,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1254
+2024-01-23,1230.86,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1368
+2024-05-08,3076.05,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1078
+2024-04-12,8052.8,6000,Salaries,BlueLine Software,Salaries payment to BlueLine Software,JE1373
+2024-08-08,296.91,5000,Office Supplies,BlueLine Software,Office Supplies payment to BlueLine Software,JE1409
+2024-01-16,3842.44,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1416
+2024-12-25,3621.78,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1015
+2024-03-09,4790.3,5100,Consulting Fees,Crestline Co,,JE1464
+2024-06-05,5246.4,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1092
+2024-07-16,3724.37,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1407
+2024-02-05,4061.19,5100,Consulting Fees,CloudWorks Inc,Consulting Fees payment to CloudWorks Inc,JE1219
+2024-06-27,605.85,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1336
+2024-02-16,4207.81,7000,Equipment,Grainger Industrial,Equipment payment to Grainger Industrial,JE1264
+2024-02-22,782.06,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1149
+2024-09-25,6481.59,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1350
+2024-05-24,317.02,5200,Software Subscriptions,Ironwood Supply,Software Subscriptions payment to Ironwood Supply,JE1221
+2024-08-22,544.85,5200,Software Subscriptions,Summit Travel,Software Subscriptions payment to Summit Travel,JE1068
+2024-11-08,5310.95,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1114
+2024-06-25,2000,7000,Equipment,CloudWorks Inc,Equipment round payment,JE1437
+2024-05-10,401.72,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1324
+2024-05-13,181.16,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1066
+2024-12-12,5788.71,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1001
+2024-12-11,1040.18,6100,Travel,Rivera Consulting,Travel payment to Rivera Consulting,JE1063
+2024-02-08,888.33,6100,Travel,Rivera Consulting,Travel payment to Rivera Consulting,JE1082
+2024-12-13,8841.4,6000,Salaries,Rivera Consulting,Salaries payment to Rivera Consulting,JE1321
+2024-10-17,353.7,5000,Office Supplies,Payroll Partners,Office Supplies payment to Payroll Partners,JE1035
+2024-07-05,1329.09,6100,Travel,CloudWorks Inc,Travel payment to CloudWorks Inc,JE1351
+2024-02-16,5018.41,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1024
+2024-04-26,2847.27,5100,Consulting Fees,Summit Travel,Consulting Fees payment to Summit Travel,JE1171
+2024-12-11,1101.61,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1267
+2024-08-07,8910.29,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1022
+2024-05-09,20,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1404
+2024-05-26,9850.0,7000,Equipment,Wexler LLC,,JE1462
+2024-03-20,393.26,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1307
+2024-07-24,5959.57,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1292
+2024-07-01,285.18,5000,Office Supplies,Payroll Partners,Office Supplies payment to Payroll Partners,JE1405
+2024-02-14,9236.56,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1156
+2024-06-18,4122.06,7000,Equipment,Ironwood Supply,Equipment payment to Ironwood Supply,JE1044
+2024-03-05,8940.97,6000,Salaries,CloudWorks Inc,Salaries payment to CloudWorks Inc,JE1294
+2024-10-31,2671.75,5100,Consulting Fees,Summit Travel,Consulting Fees payment to Summit Travel,JE1193
+2024-01-23,4632.78,7000,Equipment,Grainger Industrial,Equipment payment to Grainger Industrial,JE1398
+2024-03-22,8526.82,6000,Salaries,Vantage Group,Salaries one-off,JE1454
+2024-09-17,2029.85,7000,Equipment,BlueLine Software,Equipment payment to BlueLine Software,JE1361
+2024-12-09,2497.6,6100,Travel,Grainger Industrial,Travel payment to Grainger Industrial,JE1304
+2024-11-13,3279.17,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1086
+2024-02-02,1865.23,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1388
+2024-04-29,287.92,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1003
+2024-05-20,1150.69,5200,Software Subscriptions,BlueLine Software,Software Subscriptions payment to BlueLine Software,JE1252
+2024-11-08,20,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1183
+2024-02-07,500,5200,Software Subscriptions,Metro Utilities,Software Subscriptions round payment,JE1436
+2024-08-05,620.89,6100,Travel,Grainger Industrial,Travel payment to Grainger Industrial,JE1165
+2024-12-18,7625.58,6000,Salaries,Payroll Partners,Salaries payment to Payroll Partners,JE1117
+2024-07-04,5859.81,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1429
+2024-05-06,1630.94,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1041
+2024-01-22,752.47,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1084
+2024-02-28,1485.93,5200,Software Subscriptions,Ironwood Supply,Software Subscriptions payment to Ironwood Supply,JE1028
+2024-05-09,245.75,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1207
+2024-10-21,1000,6000,Salaries,CloudWorks Inc,Salaries round payment,JE1435
+2024-01-05,1172.68,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1069
+2024-01-26,230.41,5000,Office Supplies,Ironwood Supply,Office Supplies payment to Ironwood Supply,JE1280
+2024-07-18,368.22,5000,Office Supplies,Payroll Partners,Office Supplies payment to Payroll Partners,JE1129
+2024-07-31,2952.39,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1217
+2024-05-02,11240.12,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1034
+2024-07-16,3420.91,7000,Equipment,BlueLine Software,Equipment payment to BlueLine Software,JE1227
+2024-11-06,315.39,5000,Office Supplies,Ironwood Supply,Office Supplies payment to Ironwood Supply,JE1253
+2024-03-25,183.35,5000,Office Supplies,BlueLine Software,Office Supplies payment to BlueLine Software,JE1134
+2024-12-06,630.29,6100,Travel,CloudWorks Inc,Travel payment to CloudWorks Inc,JE1392
+2024-08-28,5275.0,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1341
+2024-12-31,981.18,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1381
+2024-07-08,1087.13,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1072
+2024-07-02,815.84,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1085
+2024-01-04,1593.83,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1325
+2024-09-27,10030.41,6000,Salaries,Metro Utilities,Salaries payment to Metro Utilities,JE1027
+2024-11-11,9152.4,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1154
+2024-03-26,5379.31,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1145
+2024-02-08,6368.84,7000,Equipment,Ironwood Supply,Equipment payment to Ironwood Supply,JE1415
+2024-01-11,236.03,5000,Office Supplies,BlueLine Software,Office Supplies payment to BlueLine Software,JE1331
+2024-05-09,4202.05,7000,Equipment,BlueLine Software,Equipment payment to BlueLine Software,JE1354
+2024-06-13,544.15,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1224
+2024-08-09,5926.01,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1302
+2024-11-19,121.34,5000,Office Supplies,Payroll Partners,Office Supplies payment to Payroll Partners,JE1237
+2024-06-25,1861.02,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1223
+2024-12-12,9168.78,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1246
+2024-03-07,1000,6100,Travel,Rivera Consulting,Travel round payment,JE1433
+2024-08-15,1579.03,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1239
+2024-02-19,8636.71,6000,Salaries,Payroll Partners,Salaries payment to Payroll Partners,JE1047
+2024-01-29,3186.27,5100,Consulting Fees,BlueLine Software,Consulting Fees payment to BlueLine Software,JE1323
+2024-06-10,2563.04,5100,Consulting Fees,Ironwood Supply,Consulting Fees payment to Ironwood Supply,JE1403
+2024-06-19,8475.36,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1203
+2024-01-17,1200.81,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1018
+2024-03-22,7836.91,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1090
+2024-01-10,8383.23,6000,Salaries,Rivera Consulting,Salaries payment to Rivera Consulting,JE1384
+2024-07-29,4602.08,7000,Equipment,Grainger Industrial,Equipment payment to Grainger Industrial,JE1089
+2024-11-05,9354.24,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1419
+2024-08-05,506.01,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1118
+2024-05-22,256.51,5000,Office Supplies,Payroll Partners,Office Supplies payment to Payroll Partners,JE1045
+2024-09-13,597.43,5200,Software Subscriptions,Summit Travel,Software Subscriptions payment to Summit Travel,JE1030
+2024-10-23,321.64,6100,Travel,Rivera Consulting,Travel payment to Rivera Consulting,JE1146
+2024-08-30,8133.01,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1164
+2024-08-20,7678.96,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1299
+2024-11-15,10104.27,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1102
+2024-04-30,625.97,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1337
+2024-03-14,1818.34,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1390
+2024-12-02,1285.29,5200,Software Subscriptions,Ironwood Supply,Software Subscriptions payment to Ironwood Supply,JE1208
+2024-03-07,8672.31,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1080
+2024-01-17,5931.1,7000,Equipment,BlueLine Software,Equipment payment to BlueLine Software,JE1002
+2024-07-04,382.19,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1289
+2024-02-23,9795.82,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1306
+2024-03-21,4736.74,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1428
+2024-01-25,701.09,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1387
+2024-11-26,893.52,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1349
+2024-10-01,1531.53,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1051
+2024-04-29,5386.63,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1370
+2024-01-26,2341.07,5100,Consulting Fees,CloudWorks Inc,Consulting Fees payment to CloudWorks Inc,JE1119
+2024-09-22,6020.43,7000,Equipment,Summit Travel,Equipment weekend entry,JE1440
+2024-06-04,3514.06,5100,Consulting Fees,Ironwood Supply,Consulting Fees payment to Ironwood Supply,JE1271
+2024-03-19,318.9,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1025
+2024-12-09,777.97,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1359
+2024-05-06,766.92,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1122
+2024-09-05,5983.85,5100,Consulting Fees,BlueLine Software,Consulting Fees payment to BlueLine Software,JE1055
+2024-09-16,7048.19,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1342
+2024-05-09,9566.48,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1139
+2024-10-15,4991.23,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1339
+2024-06-21,313.19,5000,Office Supplies,Metro Utilities,Office Supplies payment to Metro Utilities,JE1138
+2024-11-11,2611.16,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1275
+2024-09-16,1088.65,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1103
+2024-12-11,10540.86,6000,Salaries,Metro Utilities,Salaries payment to Metro Utilities,JE1109
+2024-10-24,399.26,5000,Office Supplies,BlueLine Software,Office Supplies payment to BlueLine Software,JE1345
+2024-07-18,880.19,5200,Software Subscriptions,Summit Travel,Software Subscriptions payment to Summit Travel,JE1131
+2024-08-30,5153.34,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1226
+2024-07-24,8779.92,6000,Salaries,Rivera Consulting,Salaries payment to Rivera Consulting,JE1177
+2024-08-12,539.43,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1040
+2024-05-22,964.95,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1309
+2024-11-25,10307.1,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1021
+2024-02-08,6987.56,7000,Equipment,Payroll Partners,Equipment payment to Payroll Partners,JE1148
+2024-10-10,862.5,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1074
+2024-05-09,7786.87,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1176
+2024-02-16,5804.77,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1202
+2024-09-25,7484.38,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1393
+2024-02-01,434.0,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1278
+2024-03-07,4596.46,7000,Equipment,BlueLine Software,Equipment payment to BlueLine Software,JE1357
+2024-02-05,367.56,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1062
+2024-03-11,4347.37,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1363
+2024-06-28,123.93,5000,Office Supplies,Ironwood Supply,Office Supplies payment to Ironwood Supply,JE1140
+2024-05-01,5981.47,7000,Equipment,Grainger Industrial,Equipment payment to Grainger Industrial,JE1286
+2024-03-18,10011.0,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1178
+2024-12-20,2741.39,5100,Consulting Fees,CloudWorks Inc,Consulting Fees payment to CloudWorks Inc,JE1367
+2024-01-09,3412.02,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1162
+2024-07-18,1233.96,5200,Software Subscriptions,Ironwood Supply,Software Subscriptions payment to Ironwood Supply,JE1394
+2024-06-10,20,6100,Travel,Grainger Industrial,Travel payment to Grainger Industrial,JE1340
+2024-03-07,9064.2,6000,Salaries,Grainger Industrial,,JE1449
+2024-06-25,652.14,6100,Travel,Rivera Consulting,Travel payment to Rivera Consulting,JE1320
+2024-07-31,333.75,5000,Office Supplies,Metro Utilities,Office Supplies payment to Metro Utilities,JE1115
+2024-08-09,3404.72,7000,Equipment,Grainger Industrial,Equipment payment to Grainger Industrial,JE1152
+2024-04-24,1000,6100,Travel,Payroll Partners,Travel round payment,JE1430
+2024-01-11,327.8,5000,Office Supplies,Payroll Partners,Office Supplies payment to Payroll Partners,JE1142
+2024-07-15,996.22,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1126
+2024-11-06,7307.29,6000,Salaries,BlueLine Software,Salaries payment to BlueLine Software,JE1098
+2024-02-07,1163.99,6100,Travel,CloudWorks Inc,Travel payment to CloudWorks Inc,JE1247
+2024-09-22,1194.47,5100,Consulting Fees,CloudWorks Inc,Consulting Fees weekend entry,JE1438
+2024-12-30,1447.74,6100,Travel,Rivera Consulting,Travel payment to Rivera Consulting,JE1375
+2024-08-14,9882.33,6000,Salaries,Metro Utilities,Salaries payment to Metro Utilities,JE1181
+2024-08-20,8362.73,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1279
+2024-08-28,261.02,5000,Office Supplies,Summit Travel,Office Supplies payment to Summit Travel,JE1175
+2024-11-21,9104.96,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1395
+2024-06-11,1247.44,6100,Travel,BlueLine Software,Travel payment to BlueLine Software,JE1235
+2024-04-01,6906.55,5100,Consulting Fees,BlueLine Software,Consulting Fees payment to BlueLine Software,JE1088
+2024-01-15,3732.75,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1380
+2024-01-31,6555.83,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1192
+2024-11-21,4571.73,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1269
+2024-11-22,7849.53,6000,Salaries,CloudWorks Inc,Salaries payment to CloudWorks Inc,JE1244
+2024-06-05,3253.17,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1166
+2024-11-11,9042.19,6000,Salaries,Delco Services,Salaries one-off,JE1453
+2024-07-26,7357.45,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1106
+2024-06-28,8002.53,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1413
+2024-07-04,6575.52,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1418
+2024-09-16,4857.33,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1031
+2024-07-10,291.1,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1241
+2024-10-10,3000,5200,Software Subscriptions,Metro Utilities,Software Subscriptions round payment,JE1432
+2024-11-16,608.41,5000,Office Supplies,Summit Travel,Office Supplies weekend entry,JE1441
+2024-08-14,363.47,5000,Office Supplies,Metro Utilities,Office Supplies payment to Metro Utilities,JE1210
+2024-10-10,767.04,5200,Software Subscriptions,Summit Travel,Software Subscriptions payment to Summit Travel,JE1104
+2024-05-16,425.09,5000,Office Supplies,Payroll Partners,Office Supplies payment to Payroll Partners,JE1211
+2024-06-24,468.7,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1077
+2024-04-25,538.93,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1214
+2024-02-13,954.32,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1160
+2024-07-15,3598.09,5100,Consulting Fees,Payroll Partners,Consulting Fees payment to Payroll Partners,JE1225
+2024-07-12,432.07,6100,Travel,Rivera Consulting,Travel payment to Rivera Consulting,JE1009
+2024-11-01,1223.9,6100,Travel,Summit Travel,Travel payment to Summit Travel,JE1097
+2024-10-07,909.77,5200,Software Subscriptions,Payroll Partners,Software Subscriptions payment to Payroll Partners,JE1385
+2024-12-30,8404.73,6000,Salaries,Rivera Consulting,Salaries payment to Rivera Consulting,JE1293
+2024-09-30,3397.56,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1016
+2024-12-31,7827.6,6000,Salaries,Rivera Consulting,Salaries payment to Rivera Consulting,JE1124
+2024-03-23,1171.47,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions weekend entry,JE1439
+2024-05-15,504.82,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1075
+2024-03-04,7430.35,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1194
+2024-03-20,1200.84,6100,Travel,Rivera Consulting,Travel payment to Rivera Consulting,JE1317
+2024-07-10,92.19,5000,Office Supplies,BlueLine Software,Office Supplies payment to BlueLine Software,JE1379
+2024-11-08,2148.03,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1268
+2024-05-01,2230.43,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1087
+2024-05-10,747.85,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1245
+2024-12-27,6262.94,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1383
+2024-10-22,1501.39,5200,Software Subscriptions,Orion Labs,Software Subscriptions one-off,JE1455
+2024-12-12,7827.18,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1369
+2024-09-10,2086.26,7000,Equipment,BlueLine Software,Equipment payment to BlueLine Software,JE1116
+2024-11-01,954.86,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1295
+2024-02-20,901.77,6100,Travel,BlueLine Software,Travel payment to BlueLine Software,JE1296
+2024-02-09,854.83,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1335
+2024-02-25,24850.0,7000,Equipment,Orion Labs,,JE1463
+2024-05-20,10838.84,6000,Salaries,Grainger Industrial,Salaries payment to Grainger Industrial,JE1414
+2024-12-06,430.63,5000,Office Supplies,BlueLine Software,Office Supplies payment to BlueLine Software,JE1305
+2024-05-22,418.24,5000,Office Supplies,BlueLine Software,Office Supplies payment to BlueLine Software,JE1013
+2024-01-24,2956.1,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1322
+2024-12-13,1158.39,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1352
+2024-06-07,1748.3,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1371
+2024-10-18,542.69,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1157
+2024-04-26,1023.93,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1298
+2024-03-22,6529.8,7000,Equipment,Payroll Partners,Equipment payment to Payroll Partners,JE1213
+2024-03-25,8774.36,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1056
+2024-11-26,532.22,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1344
+2024-05-21,5468.45,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1169
+2024-02-06,341.83,5000,Office Supplies,Metro Utilities,Office Supplies payment to Metro Utilities,JE1188
+2024-08-23,1134.7,5200,Software Subscriptions,Ironwood Supply,Software Subscriptions payment to Ironwood Supply,JE1008
+2024-11-08,5662.9,5100,Consulting Fees,Rivera Consulting,Consulting Fees payment to Rivera Consulting,JE1243
+2024-11-19,5302.72,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1400
+2024-09-26,4124.71,5100,Consulting Fees,BlueLine Software,Consulting Fees payment to BlueLine Software,JE1288
+2024-09-05,1156.18,5200,Software Subscriptions,Payroll Partners,Software Subscriptions payment to Payroll Partners,JE1362
+2024-05-01,992.75,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1250
+2024-07-17,9154.43,6000,Salaries,CloudWorks Inc,Salaries payment to CloudWorks Inc,JE1272
+2024-04-19,313.11,5000,Office Supplies,Metro Utilities,Office Supplies payment to Metro Utilities,JE1424
+2024-07-31,959.48,5200,Software Subscriptions,Grainger Industrial,Software Subscriptions payment to Grainger Industrial,JE1259
+2024-05-20,921.72,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1172
+2024-03-07,299.19,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1303
+2024-03-19,1158.83,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1153
+2024-07-31,5468.62,5100,Consulting Fees,Ironwood Supply,Consulting Fees payment to Ironwood Supply,JE1378
+2024-07-11,4502.08,7000,Equipment,Payroll Partners,Equipment payment to Payroll Partners,JE1315
+2024-07-22,500,5200,Software Subscriptions,BlueLine Software,Software Subscriptions round payment,JE1434
+2024-01-19,2486.2,7000,Equipment,CloudWorks Inc,Equipment payment to CloudWorks Inc,JE1083
+2024-04-23,158.98,5000,Office Supplies,Summit Travel,Office Supplies payment to Summit Travel,JE1163
+2024-03-14,521.28,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1313
+2024-04-08,813.02,5200,Software Subscriptions,Payroll Partners,Software Subscriptions payment to Payroll Partners,JE1167
+2024-09-16,567.43,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1071
+2024-04-25,210.89,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1263
+2024-11-07,1194.81,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1310
+2024-05-24,472.06,5000,Office Supplies,CloudWorks Inc,Office Supplies payment to CloudWorks Inc,JE1076
+2024-11-15,10410.8,6000,Salaries,Summit Travel,Salaries payment to Summit Travel,JE1233
+2024-05-15,5188.59,6000,Salaries,Ironwood Supply,Salaries payment to Ironwood Supply,JE1265
+2024-03-28,9401.1,6000,Salaries,CloudWorks Inc,Salaries payment to CloudWorks Inc,JE1242
+2024-12-04,317.67,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1411
+2024-02-21,2055.7,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1170
+2024-12-04,1639.45,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1365
+2024-02-07,7382.17,6000,Salaries,Rivera Consulting,Salaries payment to Rivera Consulting,JE1070
+2024-05-17,1160.8,5200,Software Subscriptions,BlueLine Software,Software Subscriptions payment to BlueLine Software,JE1019
+2024-09-12,4960.98,5100,Consulting Fees,Metro Utilities,Consulting near-limit,JE1457
+2024-04-18,389.69,5000,Office Supplies,Grainger Industrial,Office Supplies payment to Grainger Industrial,JE1020
+2024-02-19,2563.06,5100,Consulting Fees,CloudWorks Inc,Consulting Fees payment to CloudWorks Inc,JE1256
+2024-03-22,4869.58,5100,Consulting Fees,Metro Utilities,Consulting near-limit,JE1456
+2024-09-13,5002.06,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1260
+2024-10-11,961.72,7000,Equipment,Grainger Industrial,Equipment payment to Grainger Industrial,JE1308
+2024-07-05,1268.14,6100,Travel,Payroll Partners,Travel payment to Payroll Partners,JE1101
+2024-08-12,1105.54,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1073
+2024-05-01,3411.25,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1386
+2024-01-12,4771.61,5100,Consulting Fees,BlueLine Software,Consulting near-limit,JE1458
+2024-02-26,1750.29,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1285
+2024-10-10,338.3,5000,Office Supplies,Ironwood Supply,Office Supplies payment to Ironwood Supply,JE1173
+2024-07-23,391.68,5000,Office Supplies,Rivera Consulting,Office Supplies payment to Rivera Consulting,JE1406
+2024-11-27,204.18,5000,Office Supplies,Payroll Partners,Office Supplies payment to Payroll Partners,JE1191
+2024-05-22,630.61,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1201
+2024-02-01,6169.43,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1049
+2024-11-13,1912.89,6100,Travel,Ironwood Supply,Travel payment to Ironwood Supply,JE1065
+2024-01-30,3057.81,5100,Consulting Fees,Ironwood Supply,Consulting Fees payment to Ironwood Supply,JE1060
+2024-06-28,3829.49,5100,Consulting Fees,Grainger Industrial,Consulting Fees payment to Grainger Industrial,JE1312
+2024-02-22,5481.69,6000,Salaries,Metro Utilities,Salaries payment to Metro Utilities,JE1348
+2024-09-05,4497.35,7000,Equipment,BlueLine Software,Equipment payment to BlueLine Software,JE1319
+2024-04-05,765.86,5200,Software Subscriptions,Rivera Consulting,Software Subscriptions payment to Rivera Consulting,JE1422
+2024-05-02,20,6100,Travel,CloudWorks Inc,Travel payment to CloudWorks Inc,JE1143
+2024-03-05,533.13,5200,Software Subscriptions,Payroll Partners,Software Subscriptions payment to Payroll Partners,JE1281
+2024-10-25,4834.69,5100,Consulting Fees,Ironwood Supply,Consulting near-limit,JE1460
+2024-02-21,1317.32,5200,Software Subscriptions,Metro Utilities,Software Subscriptions payment to Metro Utilities,JE1230
+2024-02-16,9618.33,6000,Salaries,CloudWorks Inc,Salaries payment to CloudWorks Inc,JE1258
+2024-08-09,270.17,5000,Office Supplies,Ironwood Supply,Office Supplies payment to Ironwood Supply,JE1197
+2024-10-08,5087.03,5100,Consulting Fees,Metro Utilities,Consulting Fees payment to Metro Utilities,JE1037
+2024-10-21,195.69,5000,Office Supplies,Summit Travel,Office Supplies payment to Summit Travel,JE1147
+2024-11-01,1442.37,5200,Software Subscriptions,CloudWorks Inc,Software Subscriptions payment to CloudWorks Inc,JE1283
+2024-03-21,7378.87,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1185
+2024-07-16,1969.41,6100,Travel,Rivera Consulting,Travel payment to Rivera Consulting,JE1099
+2024-01-09,862.64,6100,Travel,Grainger Industrial,Travel payment to Grainger Industrial,JE1287
+2024-08-22,3860.48,7000,Equipment,Summit Travel,Equipment payment to Summit Travel,JE1291
+2024-07-16,6981.03,7000,Equipment,Rivera Consulting,Equipment payment to Rivera Consulting,JE1026
+2024-05-27,1390.95,7000,Equipment,Metro Utilities,Equipment payment to Metro Utilities,JE1205
+2024-07-04,1357.29,6100,Travel,BlueLine Software,Travel payment to BlueLine Software,JE1023
+2024-11-30,4850.0,7000,Equipment,Apex Holdings,,JE1461
+2024-08-20,8995.55,7000,Equipment,Ironwood Supply,Equipment payment to Ironwood Supply,JE1206
+2024-01-01,937.22,5200,Software Subscriptions,BlueLine Software,Software Subscriptions payment to BlueLine Software,JE1391
+2024-05-29,1310.39,6100,Travel,Metro Utilities,Travel payment to Metro Utilities,JE1187
+2024-05-24,9149.0,6000,Salaries,Metro Utilities,Salaries payment to Metro Utilities,JE1372
+2024-11-14,9647.09,6000,Salaries,CloudWorks Inc,Salaries payment to CloudWorks Inc,JE1135
+2024-05-16,280.97,5000,Office Supplies,Northgate Traders,Office Supplies one-off,JE1451

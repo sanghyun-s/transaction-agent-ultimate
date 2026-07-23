@@ -18,7 +18,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.db import init_db
-from app.routers import core, files, reconcile, history, pdf, consolidated, chat
+
+from app.routers import core, files, reconcile, history, pdf, consolidated, chat, gl_review
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -54,3 +55,4 @@ app.include_router(history.router)
 app.include_router(pdf.router)
 app.include_router(consolidated.router)
 app.include_router(chat.router)
+app.include_router(gl_review.router)

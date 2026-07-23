@@ -1,10 +1,10 @@
 # 📊 Transaction Agent Ultimate (TAU)
 
-**An AI-powered accounting utility hub** — a **FastAPI backend** and **Next.js frontend** that brings journal-entry generation, terminology help, file analysis, statement review, cross-statement consolidation, conversational data & document Q&A, and an end-to-end 1099 workflow together in one bilingual (Korean / English) interface.
+**An AI-powered accounting utility hub** — a **FastAPI backend** and **Next.js frontend** that brings journal-entry generation, terminology help, file analysis, statement review, cross-statement consolidation, conversational data & document Q&A, GL audit-review triage, and an end-to-end 1099 workflow together in one bilingual (Korean / English) interface.
 
 TAU is designed to **converge a family of accounting tools into a single hub.** Rather than shipping separate apps, each capability is folded in as a compact, function-named **add-on** that sits on a shared spine — one unified work archive, one PDF ingestion engine, one language setting. Standalone prototypes (PREPARE, CASSIA, LUCENT) are being reduced to add-ons and brought in one at a time.
 
-> **Version 0.9.0** — adds the first CASSIA add-on, **Data & Document Chat**: a chat-first assistant that answers general accounting questions, queries an uploaded CSV/Excel via text-to-SQL, or retrieves from an uploaded PDF via RAG. Session-scoped and fully in-memory (no ChromaDB, no LangChain, no new dependencies). Routing is schema-aware rather than keyword-based, so it works in either language without a per-language word list.
+> **Version 0.10.0** — adds the LUCENT add-on, **GL Audit Review Packet**: upload a company-level general-ledger export and get back a prioritized review queue, data-quality checks, and a three-block evidence memo per flagged row, each grounded in the audit standard the signal was designed around. This completes the convergence roadmap — all four planned add-ons (two PREPARE, one CASSIA, one LUCENT) are now in the hub.
 
 ---
 
@@ -69,13 +69,20 @@ A PDF is ingested two ways at once: as text chunks for RAG **and**, when it cont
 
 Deliberately reduced from full CASSIA — no charts, no auth, no durable multi-session memory, no persistent "core." A **single sticky session** (survives refresh, dies on tab close) with a **New chat** reset. Bilingual; saves the whole thread to Work History.
 
-### Planned add-ons (the convergence roadmap)
+#### 9. 🔍 GL Audit Review Packet — *LUCENT add-on*
+Upload a company-level GL export (CSV/Excel) and get back a compact audit-review packet: a prioritized review queue, data-quality checks, the top flagged rows, and an evidence-request memo for each. Built on LUCENT's thesis — **ML finds, audit logic adjusts, GPT explains**:
 
-| Add-on | Source app | Function |
-|--------|-----------|----------|
-| **GL Audit Review Packet** | LUCENT | Pre-audit checks and a review packet over the general ledger. |
+- **ML finds** — an **IsolationForest** (scikit-learn, 200 trees) over six audit signals produces a raw anomaly tier. The reviewer's Detection Sensitivity setting drives contamination, and tiers are cut by quantile so the dial visibly changes the queue size.
+- **Audit logic adjusts** — two moves, in fixed order. The **materiality cascade** (benchmark → FS 4-5% → performance 50% → transaction 80%) is the only step that can *lower* a tier. The **qualitative override** fires when two or more indicators co-occur on one row, escalating it one tier *above the raw ML tier* — so a small-dollar row that materiality buried can be restored. Labels stay PCAOB-aligned and deliberately non-conclusive (*Potential Material Weakness Indicator*, *Monitor — Below Escalation Threshold*).
+- **GPT explains** — a three-block evidence memo per flagged row: **Why this row matters** / **Evidence to request** / **Not a conclusion**, with the relevant audit standard woven in as *design rationale* (AU-C 315, PCAOB AS 2401, COSO components, IT/limit controls). A banned-phrase scan runs on every memo.
 
-Each is a compact add-on renamed by function, built on the same shared spine.
+The six signals — account-level amount z-score, round number, weekend posting, missing description, new vendor, near approval threshold — each map to a recognized red flag. Data-quality checks (hash total, cross-footing, date-in-period, account mapping) run before scoring and skip gracefully when optional columns are absent.
+
+Deliberately reduced from standalone LUCENT: no charts, no full data dictionary, no seven-field memo, no Top 10/20 narrative, and the weak-label RandomForest similarity layer is dropped (it is inert without labels). Required columns are relaxed to `date, amount, account_name, vendor, description, journal_ref`. Bilingual — in Bilingual mode each language is generated as its own primary memo and interleaved, so neither half is a summary of the other. Exports a flagged CSV and a Markdown review packet, and saves to Work History.
+
+> LUCENT indicates review priority only. It does not conclude fraud or issue audit opinions.
+
+Each add-on is renamed by function and built on the same shared spine.
 
 ---
 
@@ -97,6 +104,7 @@ Each is a compact add-on renamed by function, built on the same shared spine.
 │                         │                        │   • consolidated /api/          │
 │                         │                        │                  consolidated/* │
 │                         │                        │   • chat         /api/chat/*    │
+│                         │                        │   • gl_review    /api/gl-review/*│
 └─────────────────────────┘                        └───────────┬─────────────────────┘
                                                                 │
         ┌───────────────────────────────┬───────────────────────┼───────────────────────┐
@@ -108,7 +116,7 @@ Each is a compact add-on renamed by function, built on the same shared spine.
 └────────────────────┘   └────────────────────┘   └────────────────────┘   └────────────────────┘
 ```
 
-The backend is organized into routers, with a shared `app/services/pdf/` package (ingestion + Source A + Source B) that both statement tools consume. The **Consolidated Workbook** add-on adds an `app/services/consolidated/` package that calls the shared PDF service per statement, then does the cross-statement aggregation, validation, and master-workbook generation on top. The **Data & Document Chat** add-on adds a self-contained `app/services/chat/` package — a schema-aware router, in-memory text-to-SQL, and in-memory RAG — with ChromaDB replaced by a NumPy cosine search, so it runs entirely on TAU's existing dependencies.
+The backend is organized into routers, with a shared `app/services/pdf/` package (ingestion + Source A + Source B) that both statement tools consume. The **Consolidated Workbook** add-on adds an `app/services/consolidated/` package that calls the shared PDF service per statement, then does the cross-statement aggregation, validation, and master-workbook generation on top. The **Data & Document Chat** add-on adds a self-contained `app/services/chat/` package — a schema-aware router, in-memory text-to-SQL, and in-memory RAG — with ChromaDB replaced by a NumPy cosine search, so it runs entirely on TAU's existing dependencies. The **GL Audit Review Packet** add-on adds `app/services/gl_review/`, which layers scikit-learn anomaly detection, a materiality/override scoring engine ported from LUCENT, and a standards-anchored memo generator; row memos are generated concurrently via a thread pool.
 
 ---
 
@@ -124,7 +132,7 @@ transaction-agent-ultimate/
 │   ├── requirements.txt
 │   ├── tau_history.db                  # Work History (SQLite; not committed)
 │   └── app/
-│       ├── main.py                     # app factory, mounts routers (v0.9.0)
+│       ├── main.py                     # app factory, mounts routers (v0.10.0)
 │       ├── config.py                   # typed settings
 │       ├── db.py                        # SQLite init (history table)
 │       ├── routers/
@@ -134,7 +142,8 @@ transaction-agent-ultimate/
 │       │   ├── history.py              # /api/history/*  (unified archive)
 │       │   ├── pdf.py                  # /api/pdf/ingest (shared PDF service)
 │       │   ├── consolidated.py         # /api/consolidated/* (Consolidated Workbook)
-│       │   └── chat.py                 # /api/chat/* (Data & Document Chat)
+│       │   ├── chat.py                 # /api/chat/* (Data & Document Chat)
+│       │   └── gl_review.py            # /api/gl-review/* (GL Audit Review Packet)
 │       ├── services/
 │       │   ├── openai_service.py
 │       │   ├── prompts.py              # + bilingual (KO / EN / Bilingual)
@@ -164,6 +173,14 @@ transaction-agent-ultimate/
 │       │       ├── sql_engine.py                # CSV/Excel + PDF tables → in-memory SQLite
 │       │       ├── rag_engine.py                # context-preserving chunks → cosine top-k
 │       │       └── service.py                   # facade + session store
+│       │   └── gl_review/                # ⭐ GL Audit Review Packet package
+│       │       ├── features.py                  # the six audit signals
+│       │       ├── anomaly.py                   # IsolationForest + quantile raw tier
+│       │       ├── scoring.py                   # materiality cascade + qualitative override
+│       │       ├── integrity.py                 # 4 data-quality checks
+│       │       ├── anchors.py                   # audit-standard anchor map
+│       │       ├── memo.py                      # 3-block evidence memo + guardrail
+│       │       └── service.py                   # pipeline facade
 │       └── models/
 │           ├── schemas.py
 │           ├── file_schemas.py
@@ -188,7 +205,8 @@ transaction-agent-ultimate/
     │       ├── Reconcile.js
     │       ├── StatementReview.js       # Source A + Source B
     │       ├── ConsolidatedWorkbook.js
-    │       └── DataDocumentChat.js       # ⭐ new
+    │       ├── DataDocumentChat.js
+    │       └── GLAuditReviewPacket.js    # ⭐ new
     └── styles/globals.css
 ```
 
@@ -214,11 +232,15 @@ transaction-agent-ultimate/
 | POST | `/api/chat/upload` | ⭐ Load a CSV/Excel/PDF into a chat session (side action) |
 | POST | `/api/chat/ask` | ⭐ Ask a question → routed to SQL / RAG / general |
 | POST | `/api/chat/reset` | ⭐ Clear the chat session (new blank chat) |
-| GET | `/api/chat/state` | ⭐ What's currently loaded in the session |
+| GET | `/api/chat/state` | What's currently loaded in the session |
+| POST | `/api/gl-review/analyze` | ⭐ GL export + settings → review packet |
+| GET | `/api/gl-review/download/{req_id}/{kind}` | ⭐ Flagged CSV or Markdown review memo |
 
 `/api/pdf/ingest` accepts `pdf_file`, `engine` (`skill` \| `rule`), `model`, and `source`, and returns classified transactions, an activity breakdown, a `reconciliation` block (Source A), and an `extraction_check` block (Source B).
 
 `/api/consolidated/analyze` accepts multiple `pdf_files[]`, an optional `vendor_csv`, plus `engine` and `model`, and returns a per-statement summary, cross-statement validation, and a downloadable 5-sheet master workbook.
+
+`/api/gl-review/analyze` accepts a GL `file` plus entity type, benchmark, sensitivity, review period, top-N and language, and returns materiality thresholds, summary cards, integrity findings, the top flagged rows, the AI Review Packet, and per-row evidence memos.
 
 `/api/chat/upload` accepts a `session_id` and a `file` (CSV/Excel → SQL table; PDF → RAG chunks, plus any ruled tables into SQLite). `/api/chat/ask` takes a `session_id`, `question`, and `language`, and returns the answer plus the route taken (`sql` / `rag` / `general`).
 
@@ -279,9 +301,10 @@ A global language selector (Korean / English / Bilingual) applies to every tool,
 - **v0.5.0** — journal, term, history, file analyzer, 1099 reconciliation (rule-based + Claude Agent).
 - **v0.7.0** — unified Work History archive, shared PDF ingestion service, bilingual system, and the **Statement Review** add-on (first PREPARE tool).
 - **v0.8.0** — the **Consolidated Workbook** add-on (second PREPARE tool: cross-statement vendor aggregation + 5-sheet master workbook), and **Source B** extraction-completeness, now shared by both statement tools.
-- **v0.9.0** ⭐ *(current)* — the **Data & Document Chat** add-on (first CASSIA tool: general Q&A + text-to-SQL + RAG, fully in-memory), with schema-aware routing and PDF-table querying. Reduced hard from full CASSIA — no charts, auth, or persistent core.
-- **Next** — **GL Audit Review Packet** (LUCENT) add-on. Data & Document Chat enhancements: pivot key/value summary blocks into named columns, and broaden ingestion (non-ruled/scanned PDFs, non-US number and non-UTF-8 encodings).
-- **Before any outside-user deployment** — server-issued session IDs and session-store eviction for the chat add-on (the current client-generated session ID and module-level store are intended for local single-user use).
+- **v0.9.0** — the **Data & Document Chat** add-on (first CASSIA tool: general Q&A + text-to-SQL + RAG, fully in-memory), with schema-aware routing and PDF-table querying. Reduced hard from full CASSIA — no charts, auth, or persistent core.
+- **v0.10.0** ⭐ *(current)* — the **GL Audit Review Packet** add-on (LUCENT: IsolationForest anomaly tiering + materiality cascade + qualitative override + standards-anchored evidence memos). **The convergence roadmap is complete** — all four planned add-ons are in the hub.
+- **Next** — polish rather than new tools. GL Audit Review: pivot the flagged table into a collapsible full view, optional Excel workbook export, and a period-over-period comparison. Data & Document Chat: pivot key/value summary blocks into named columns, and broaden ingestion (non-ruled/scanned PDFs, non-US number and non-UTF-8 encodings).
+- **Before any outside-user deployment** — server-issued session IDs and session-store eviction for the chat add-on, and per-request size limits on GL uploads (the current client-generated session ID, module-level store, and in-memory export cache are intended for local single-user use).
 
 The architecture is deliberately additive: each add-on plugs into the shared spine without changing the tools already in place.
 
@@ -289,9 +312,9 @@ The architecture is deliberately additive: each add-on plugs into the shared spi
 
 ## 🛠️ Tech stack
 
-**Backend:** FastAPI, pydantic-settings, OpenAI Python SDK, Claude Agent SDK, Claude PDF Skill (Sonnet), pdfplumber, pandas, openpyxl, SQLite (stdlib), NumPy (in-memory vector search for the chat add-on — no ChromaDB/LangChain).
+**Backend:** FastAPI, pydantic-settings, OpenAI Python SDK, Claude Agent SDK, Claude PDF Skill (Sonnet), pdfplumber, pandas, openpyxl, SQLite (stdlib), NumPy (in-memory vector search for the chat add-on — no ChromaDB/LangChain), scikit-learn (IsolationForest for the GL review add-on).
 **Frontend:** Next.js, React, react-markdown + remark-gfm, CSS (navy professional theme).
-**AI models:** OpenAI GPT-4o-mini (journal / term / file analyzer / Data & Document Chat) and text-embedding-3-small (chat RAG retrieval); Claude Sonnet via the PDF Skill (statement ingestion + consolidation); Claude Haiku / Opus (1099 agent orchestration).
+**AI models:** OpenAI GPT-4o-mini (journal / term / file analyzer / Data & Document Chat / GL Audit Review Packet) and text-embedding-3-small (chat RAG retrieval); Claude Sonnet via the PDF Skill (statement ingestion + consolidation); Claude Haiku / Opus (1099 agent orchestration).
 
 ---
 

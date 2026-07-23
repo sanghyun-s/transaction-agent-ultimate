@@ -19,6 +19,7 @@ export default function Sidebar({ activePage, onNavigate, language, onLanguageCh
     { id: "statement", label: `📄 ${t("명세서 검토", "Statement Review", language)}` },
     { id: "consolidated", label: `📘 ${t("통합 워크북", "Consolidated Workbook", language)}` },
     { id: "chat", label: `💬 ${t("데이터·문서 채팅", "Data & Document Chat", language)}` },
+    { id: "glreview", label: `🔍 ${t("GL 감사 검토", "GL Audit Review Packet", language)}` },
   ];
 
   return (
